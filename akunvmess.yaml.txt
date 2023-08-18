@@ -1,0 +1,5379 @@
+tproxy-port: 9898
+redir-port: 9454
+mode: rule
+allow-lan: true
+unified-delay: true
+bind-address: '*'
+log-level: info
+ipv6: true
+geodata-mode: true
+external-controller: 0.0.0.0:9090
+external-ui: dashboard/dist
+tcp-concurrent: false
+# interface-name: ""
+enable-process: true
+geodata-loader: memconservative
+# routing-mark: 233
+inbound-tfo: false
+secret: ""
+# geox-url: {mmdb: "", geoip: "", geosite: ""}
+profile:
+  store-selected: true
+  store-fake-ip: false
+experimental: {sniff-tls-sni: true, fingerprint: ""}
+sniffer:
+  enable: true
+  sniffing: [tls, http]
+  force-domain:
+    - '+'
+  skip-domain:
+    - '+.google.com'
+  port-whitelist: [443, 80]
+  force-dns-mapping: true
+  parse-pure-ip: true
+hosts: {"cacerts.digicert.com": "104.21.21.147", "ota.googlezip.net": "127.0.0.1", "ota-cache1.googlezip.net": "127.0.0.1", "ota-cache2.googlezip.net": "127.0.0.1"}
+tun:
+  enable: false
+  device: tun0
+  stack: gvisor
+  mtu: 9000
+  dns-hijack:
+    - any:53
+  auto-route: false
+  auto-detect-interface: false
+  strict_route: false
+  inet4_address: 198.18.0.1/16
+  inet6_address: [fdfe:dcba:9876::1/126]
+dns:
+  enable: true
+  ipv6: false
+  prefer-h3: false
+  default-nameserver:
+    - 'https://1.1.1.1/dns-query#final'
+    - 'tcp://1.0.0.1' # Cloudflare
+  listen: 0.0.0.0:1053
+  use-hosts: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter: ["*.local", "*.localhost"]
+  nameserver:
+    - 127.0.0.1
+#    - 'https://1.1.1.1/dns-query' # Cloudflare
+#    - 'https://8.8.8.8/dns-query' # Google
+#    - 43.229.254.206
+#    - 103.125.14.14
+#    - 103.253.26.82
+#    - 128.199.126.151
+  proxy-server-nameserver:
+    - 'https://dns.google/dns-query#final'
+  fallback:
+    - 'tcp://8.8.4.4#final'
+  fallback-filter:
+    geoip: false
+    geoip-code: "ID"
+    geosite: []
+    ipcidr: [0.0.0.0/8, 10.0.0.0/8]
+    domain: ['+.google.com', '+.youtube.com']
+base-bug:
+  bug:
+#Tsel
+    - &bug-Tsel1 static.starmakerstudios.com
+    - &bug-Tsel2 .api-t3.tiktokv.com
+    - &bug-Tsel3 104.16.65.85
+    - &bug-Tsel4 104.16.66.85
+    - &bug-Tsel5 104.16.85.20
+    - &bug-Tsel6 104.16.86.20
+    - &bug-Tsel7 104.16.87.20
+    - &bug-Tsel8 104.16.88.20
+    - &bug-Tsel9 104.16.89.20
+    - &bug-Tsel10 104.17.2.81
+    - &bug-Tsel11 104.17.202.159
+    - &bug-Tsel12 104.17.203.159
+    - &bug-Tsel13 104.17.3.81
+    - &bug-Tsel14 104.18.10.40
+    - &bug-Tsel15 104.18.11.40
+    - &bug-Tsel16 104.18.12.120
+    - &bug-Tsel17 104.18.13.120
+    - &bug-Tsel18 104.18.169.91
+    - &bug-Tsel19 104.18.18.183
+    - &bug-Tsel20 104.18.2.179
+    - &bug-Tsel21 104.18.2.2
+    - &bug-Tsel22 104.18.20.219
+    - &bug-Tsel23 104.18.21.219
+    - &bug-Tsel24 104.18.22.187
+    - &bug-Tsel25 104.18.23.187
+    - &bug-Tsel26 104.18.28.70 
+    - &bug-Tsel27 104.18.29.70
+    - &bug-Tsel28 104.18.3.179
+    - &bug-Tsel29 104.18.3.2
+    - &bug-Tsel30 104.18.30.102
+    - &bug-Tsel31 104.18.31.102
+    - &bug-Tsel32 104.18.41.141
+    - &bug-Tsel33 104.19.143.108
+    - &bug-Tsel34 104.19.186.16
+    - &bug-Tsel35 104.22.24.131
+    - &bug-Tsel36 104.22.24.131
+    - &bug-Tsel37 104.26.4.192
+    - &bug-Tsel38 104.26.4.192
+    - &bug-Tsel39 104.26.5.192
+    - &bug-Tsel40 104.26.5.192
+    - &bug-Tsel41 104.26.7.171
+    - &bug-Tsel42 104.26.7.171
+    - &bug-Tsel43 172.64.146.115
+    - &bug-Tsel44 172.67.38.66
+    - &bug-Tsel45 172.67.73.5
+    - &bug-Tsel46 172.67.73.5
+    - &bug-Tsel47 api.duniagames.co.id
+    - &bug-Tsel48 api.joox.com
+    - &bug-Tsel49 api.midtrans.com
+    - &bug-Tsel50 api22-normal-c-alisg.tiktokv.com
+    - &bug-Tsel51 api2-t3.musical.ly
+    - &bug-Tsel52 api-t3.tiktokv.com
+    - &bug-Tsel53 article.nimo.tv
+    - &bug-Tsel54 Cdn.jsdelivr.net
+    - &bug-Tsel55 cftxvidtest.vod.nimo.tv
+    - &bug-Tsel56 cf-vod.nimo.tv
+    - &bug-Tsel57 chat.sociomile.com
+    - &bug-Tsel58 desk.covid19.go.id
+    - &bug-Tsel59 duniagames.co.id
+    - &bug-Tsel60 esports.duniagames.co.id
+    - &bug-Tsel61 investors.spotify.com
+    - &bug-Tsel62 ir.huya.com 
+    - &bug-Tsel63 link.duniagames.co.id
+    - &bug-Tsel64 loop.co.id
+    - &bug-Tsel65 Midtrans.com
+    - &bug-Tsel66 override.cf.hls.nimo.tv
+    - &bug-Tsel67 override.cf-test.hls.nimo.tv
+    - &bug-Tsel68 p16-tiktokcdn-com.akamaized.net
+    - &bug-Tsel69 poe.garena.com
+    - &bug-Tsel70 rn-static.nimo.tv
+    - &bug-Tsel71 ruangguru.com
+    - &bug-Tsel72 skul.id
+    - &bug-Tsel73 stage5.duniagames.co.id
+    - &bug-Tsel74 starmakerstudios.com
+    - &bug-Tsel75 Tawk.to
+    - &bug-Tsel76 tsel.me
+    - &bug-Tsel77 Udemy.com
+    - &bug-Tsel78 v24.tiktokcdn.com
+    - &bug-Tsel79 v27.tiktokcdn.com
+    - &bug-Tsel80 www.covid19.go.id
+    - &bug-Tsel81 Yourupload.com
+    - &bug-Tsel82 zendesk1.tiktok.com
+    - &bug-Tsel83 zendesk2.tiktok.com
+    - &bug-Tsel84 zendesk3.tiktok.com
+    - &bug-Tsel85 zendesk4.tiktok.com
+    - &bug-Tsel86 staging-dashboard.skul.id
+    - &bug-Tsel87 apidocs.skul.id
+    - &bug-Tsel88 b2b2c.skul.id
+    - &bug-Tsel89 www.skul.id
+    - &bug-Tsel90 my.skul.id
+    - &bug-Tsel91 dashboard.skul.id
+    - &bug-Tsel92 staging-b2b2c.skul.id
+    - &bug-Tsel93 staging-api.skul.id
+    - &bug-Tsel94 staging-my.skul.id
+    - &bug-Tsel95 video.skul.id
+    - &bug-Tsel96 api.skul.id
+    - &bug-Tsel97 dev.skul.id
+    - &bug-Tsel98 mail-qwords.skul.id
+    - &bug-Tsel99 mail.skul.id
+
+#Byu
+    - &bug-Byu1 byu.id
+    - &bug-Byu2 viu.com
+    - &bug-Byu3 api.supersoccer.tv
+    - &bug-Byu4 tribenow.tv
+    - &bug-Byu5 api.tribenow.tv
+    - &bug-Byu6 vidiomax.com
+    - &bug-Byu7 apps.vidiomax.com
+    - &bug-Byu8 host.vidiomax.com
+    - &bug-Byu9 web.blackberry.com
+    - &bug-Byu10 line.me
+    - &bug-Byu11 zonagratis.telkomsel.com
+    - &bug-Byu12 manga.line.naver.jp
+    - &bug-Byu13 tsel.me
+    - &bug-Byu14 telkomselgprs.com
+    - &bug-Byu15 my.telkomsel.info
+    - &bug-Byu16 telkomsel.waze.com
+    - &bug-Byu17 m.loop.com
+    - &bug-Byu18 music.line.me
+    - &bug-Byu19 manga.line.me
+    - &bug-Byu20 mobile.line.me
+    - &bug-Byu21 whatsapp.net
+    - &bug-Byu22 www.wechat.com
+    - &bug-Byu23 telkomsel.akamobi.com
+    - &bug-Byu24 klip.telkomsel.com
+    - &bug-Byu25 indihome.co.id
+    - &bug-Byu26 tsel.com
+    - &bug-Byu27 my.telkomsel.com
+    - &bug-Byu28 operamini.net
+    - &bug-Byu29 server4.operamini.net
+    - &bug-Byu30 mobi.telkomsel.com
+    - &bug-Byu31 Byu.com
+    - &bug-Byu32 Space.byu.id
+    - &bug-Byu33 community.king.com
+    - &bug-Byu34 162.159.138.78
+    - &bug-Byu35 162.159.138.79
+    - &bug-Byu36 104.18.28.7
+    - &bug-Byu37 blog.ruangguru.com
+    - &bug-Byu38 layanan.ruangguru.com
+    - &bug-Byu39 ruangguru.com
+    - &bug-Byu40 event.ruangguru.com
+    - &bug-Byu41 cdn.zenius.net
+    - &bug-Byu42 live-class.zenius.net
+    - &bug-Byu43 instagram.fcgk8-1.fna.fbcdn.net
+    - &bug-Byu44 live-upload.instagram.com
+    - &bug-Byu45 video.fjog2-1.fna.fbcdn.net
+    - &bug-Byu46 m.instagram.com
+    - &bug-Byu47 instagram.fcgk9-1.fna.fbcdn.net
+    - &bug-Byu48 instagram.fdtm1-1.fna.fbcdn.net
+    - &bug-Byu49 104.19.143.108
+    - &bug-Byu50 riseofnowlin.mobi
+    - &bug-Byu51 104.21.65.170
+    - &bug-Byu52 cdn.riseofnowlin.mobi
+    - &bug-Byu53 172.67.164.239
+    - &bug-Byu54 www.mobile-legends.net
+    - &bug-Byu55 104.21.91.25
+    - &bug-Byu56 mobile-legends.net
+    - &bug-Byu57 172.67.208.218
+    - &bug-Byu58 msupport.pubg.com
+    - &bug-Byu59 162.159.138.6
+    - &bug-Byu60 poe.garena.com
+    - &bug-Byu61 104.19.185.16
+    - &bug-Byu62 ir.huya.com
+    - &bug-Byu63 104.17.202.159
+    - &bug-Byu64 dashboard-dev.nimo.tv
+    - &bug-Byu65 104.18.23.187
+    - &bug-Byu66 cf-vod.nimo.tv
+    - &bug-Byu67 104.18.21.219
+    - &bug-Byu68 cftxvidtest.vod.nimo.tv
+    - &bug-Byu69 104.18.13.120
+    - &bug-Byu70 cftxvid.vod.nimo.tv
+    - &bug-Byu71 104.18.12.120
+    - &bug-Byu72 overrid.cf-hls.nimo.tv
+    - &bug-Byu73 104.18.29.170
+    - &bug-Byu74 v38.tiktokcdn.com
+    - &bug-Byu75 zendesk3.tiktok.com
+    - &bug-Byu76 api2-t3.musical.ly
+    - &bug-Byu77 v27.titokcdn.com
+    - &bug-Byu78 s16.tiktok.cdn
+    - &bug-Byu79 m.vidio.com
+    - &bug-Byu80 172.67.5.14
+    - &bug-Byu81 104.22.4.240
+    - &bug-Byu82 quiz.vidio.com
+    - &bug-Byu83 quiz.int.vidio.com
+
+#XL
+    - &bug-XL1  104.17.3.81
+    - &bug-XL2  104.18.31.9
+    - &bug-XL3  141.193.213.20
+    - &bug-XL4  172.64.201.17
+    - &bug-XL5  172.67.73.39
+    - &bug-XL6 .api-t3.tiktokv.com
+    - &bug-XL7 104.16.53.111
+    - &bug-XL8 104.16.65.85
+    - &bug-XL9 104.16.66.85
+    - &bug-XL10 104.16.85.20
+    - &bug-XL11 104.16.86.20
+    - &bug-XL12 104.16.87.20
+    - &bug-XL13 104.16.88.20
+    - &bug-XL14 104.16.89.20
+    - &bug-XL15 104.17.2.81
+    - &bug-XL16 104.17.3.81
+    - &bug-XL17 104.18.11.8
+    - &bug-XL18 104.18.12.78
+    - &bug-XL19 104.18.13.78
+    - &bug-XL20 104.18.169.91
+    - &bug-XL21 104.18.18.183
+    - &bug-XL22 104.18.19.242
+    - &bug-XL23 104.18.2.2
+    - &bug-XL24 104.18.23.37
+    - &bug-XL25 104.18.3.2
+    - &bug-XL26 104.18.30.9
+    - &bug-XL27 104.18.31.9
+    - &bug-XL28 104.20.75.141
+    - &bug-XL29 104.21.71.112
+    - &bug-XL30 104.22.24.131
+    - &bug-XL31 104.26.4.126
+    - &bug-XL32 104.26.4.192
+    - &bug-XL33 104.26.5.192
+    - &bug-XL34 170.114.45.0
+    - &bug-XL35 172.65.198.136
+    - &bug-XL36 172.67.38.66
+    - &bug-XL37 172.67.73.5
+    - &bug-XL38 Api.joox.com
+    - &bug-XL39 api.midtrans.com
+    - &bug-XL40 api.midtrans.com
+    - &bug-XL41 api15-h2.tiktokv.com
+    - &bug-XL42 api22-normal-c-alisg.tiktokv.com
+    - &bug-XL43 autodiscovery.musical.ly
+    - &bug-XL44 bimbel.ruangguru.com
+    - &bug-XL45 blog.clova.line.me
+    - &bug-XL46 blogs.microsoft.com
+    - &bug-XL47 Cdn.jsdelivr.net
+    - &bug-XL48 cdn.onlymega.com
+    - &bug-XL49 cdn.udemy.com
+    - &bug-XL50 cdn.udemy.com
+    - &bug-XL51 cf-vod.nimo.tv
+    - &bug-XL52 chat.sociomile.com
+    - &bug-XL53 go.appsflyer.com
+    - &bug-XL54 gomarketplacecontent-cf.zoom.us
+    - &bug-XL55 help.viu.com
+    - &bug-XL56 investors.spotify.com
+    - &bug-XL57 ir.huya.com
+    - &bug-XL58 ir.roblox.com
+    - &bug-XL59 kelas.rangguru.com
+    - &bug-XL60 lms.uin-antasari.ac.id
+    - &bug-XL61 meetings.googleapis.com
+    - &bug-XL62 Midtrans.com
+    - &bug-XL63 msgapi.teams.live.com
+    - &bug-XL64 npca.netflix.com
+    - &bug-XL65 p16-tiktokcdn-com.akamaized.net
+    - &bug-XL66 presence.teams.live.com
+    - &bug-XL67 prod-in.viu.com
+    - &bug-XL68 pubgmobile.com
+    - &bug-XL69 quiz.int.vidio.com
+    - &bug-XL70 quiz.vidio.com
+    - &bug-XL71 ruangguru.com
+    - &bug-XL72 source.zoom.us
+    - &bug-XL73 static.starmakerstudios.com
+    - &bug-XL74 store.zoom.us
+    - &bug-XL75 talkgadget.google.com
+    - &bug-XL76 Tawk.to
+    - &bug-XL77 teams.live.com
+    - &bug-XL78 Udemy.com
+    - &bug-XL79 updates.netflix.com
+    - &bug-XL80 v24.tiktokcdn.com
+    - &bug-XL81 v27.tiktokcdn.com
+    - &bug-XL82 v27.tiktokcdn.com
+    - &bug-XL83 video.joox.com 
+    - &bug-XL84 web.web.whatsapp.com
+    - &bug-XL85 www.123.xl.co.id/min-balance
+    - &bug-XL86 www.udemy.com
+    - &bug-XL87 Yourupload.com
+    - &bug-XL88 zendesk1.appsflyer.com
+    - &bug-XL89 zendesk1.grab.com
+    - &bug-XL90 zendesk1.roblox.com
+    - &bug-XL91 zendesk1.tiktok.com
+    - &bug-XL92 zendesk2.shoppe.ph
+    - &bug-XL93 zendesk2.tiktok.com
+    - &bug-XL94 zendesk3.tiktok.com
+    - &bug-XL95 zendesk4.grabtaxi.com
+    - &bug-XL96 zendesk4.shoppe.sg
+    - &bug-XL97 zendesk4.tiktok.com
+    - &bug-XL98 zoomappdocs.zoom.us
+
+#Isat
+    - &bug-Isat1 202.152.162.239/lpisat/ramadhan
+    - &bug-Isat2 114.6.2.64
+    - &bug-Isat3 114.6.2.58
+    - &bug-Isat4 114.6.2.56
+    - &bug-Isat5 114.6.2.52
+    - &bug-Isat6 114.6.2.47 
+    - &bug-Isat7 114.6.2.34
+    - &bug-Isat8 114.6.2.27
+    - &bug-Isat9 114.6.2.16
+    - &bug-Isat10 114.5.5.66
+    - &bug-Isat11 114.5.5.5 
+    - &bug-Isat12 114.5.1.1 
+    - &bug-Isat13 202.152.161.250 
+    - &bug-Isat14 202.152.161.242 
+    - &bug-Isat15 202.152.161.235 
+    - &bug-Isat16 202.152.161.227 
+    - &bug-Isat17 202.152.161.224 
+    - &bug-Isat18 114.6.2.90
+    - &bug-Isat19 114.6.2.86
+    - &bug-Isat20 114.6.2.83
+    - &bug-Isat21 114.6.2.83
+    - &bug-Isat22 114.6.2.8o
+    - &bug-Isat23 114.6.2.70
+    - &bug-Isat24 114.6.2.60
+    - &bug-Isat25 114.6.2.57
+    - &bug-Isat26 114.6.2.54
+    - &bug-Isat27 114.6.2.51
+    - &bug-Isat28 114.6.2.50
+    - &bug-Isat29 114.6.2.49
+    - &bug-Isat30 114.6.2.44
+    - &bug-Isat31 114.6.2.30
+    - &bug-Isat32 114.6.2.25
+    - &bug-Isat33 114.6.2.20
+    - &bug-Isat34 114.6.2.14
+    - &bug-Isat35 114.6.2.13
+    - &bug-Isat36 219.83.58.30
+    - &bug-Isat37 219.83.58.13
+    - &bug-Isat38 202.155.88.112
+    - &bug-Isat39 202.155.3.234 
+    - &bug-Isat40 202.155.27.37 
+    - &bug-Isat41 202.155.150.32
+    - &bug-Isat42 202.155.100.29
+    - &bug-Isat43 202.155.100.24
+    - &bug-Isat44 124.81.92.152 
+    - &bug-Isat45 202.155.87.9
+    - &bug-Isat46 124.81.92.12
+    - &bug-Isat47 124.81.81.87
+    - &bug-Isat48 124.81.81.84
+    - &bug-Isat49 124.81.81.82
+    - &bug-Isat50 104.17.70.206
+    - &bug-Isat51 104.17.71.206
+    - &bug-Isat52 104.18.25.139
+    - &bug-Isat53 104.18.24.139
+    - &bug-Isat54 104.16.66.85
+    - &bug-Isat55 104.16.65.85
+    - &bug-Isat56 141.193.213.20
+    - &bug-Isat57 141.193.213.21
+    - &bug-Isat58 170.114.52.2
+    - &bug-Isat59 170.114.52.3
+    - &bug-Isat60 141.193.213.10
+    - &bug-Isat61 104.16.51.111
+    - &bug-Isat62 104.16.53.111
+    - &bug-Isat63 162.159.135.42
+    - &bug-Isat64 162.159.128.7
+    - &bug-Isat65 162.159.138.6
+    - &bug-Isat66 104.20.74.141
+    - &bug-Isat67 104.20.75.141
+    - &bug-Isat68 www.udemy.com
+    - &bug-Isat69 zoom.us
+    - &bug-Isat70 www.zoom.us
+    - &bug-Isat71 us02web.zoom.us
+    - &bug-Isat72 zoomcares.zoom.us
+    - &bug-Isat73 support.zoom.us
+    - &bug-Isat74 www.skillacademy.com
+    - &bug-Isat75 callinghelp.webex.com
+    - &bug-Isat76 zendesk1.appsflyer.com
+
+#Smar
+    - &bug-Smar1 fota-asset.Smartfren.com
+    - &bug-Smar2 mcomm-ops.smartfren.com
+    - &bug-Smar3 fota-api.smartfren.com
+    - &bug-Smar4 fota-admin.Smartfren.com
+    - &bug-Smar5 4g-lte.smartfren.co
+    - &bug-Smar6 m.Smartfren.com
+    - &bug-Smar7 mysmartfrend.com
+    - &bug-Smar8 jkt-mail.smartfren.com
+    - &bug-Smar9 jkt1-speedtest.Smartfren.com
+    - &bug-Smar10 com/prepaid_notification
+    - &bug-Smar11 4g-lte.smartfren.co
+    - &bug-Smar12 mysmartfrend.com
+    - &bug-Smar13 0.facebook.com
+    - &bug-Smar14 www.smartfren.com
+    - &bug-Smar15 line.me
+    - &bug-Smar16 twitter.com
+    - &bug-Smar17 facebook.com
+    - &bug-Smar18 wechat.com
+
+
+base-proxy:
+  vmessWSSNI:
+    - &basevmess
+      type: vmess
+      alterId: 0
+      cipher: auto
+      udp: true
+      udp-over-tcp: true
+      network: ws
+      tls: true
+      skip-cert-verify: true
+  vmessWSCDN:
+    - &basevmess
+      type: vmess
+      alterId: 0
+      cipher: auto
+      udp: true
+      udp-over-tcp: true
+      network: ws
+      tls: true
+      skip-cert-verify: true
+  vmessWSCDN80:
+    - &basevmess
+      type: vmess
+      alterId: 0
+      cipher: auto
+      udp: true
+      udp-over-tcp: true
+      network: ws
+      tls: false
+      skip-cert-verify: true
+  vmessGRPC:
+    - &basevmess
+      type: vmess
+      alterId: 0
+      cipher: auto
+      udp: true
+      udp-over-tcp: true
+      network: ws
+      tls: false
+      skip-cert-verify: true
+      
+base-proxy-groups:
+  url:
+    - &url-gg http://www.gstatic.com/generate_204
+    - &url-cf http://cp.cloudflare.com/generate_204
+
+proxies:
+#VmessWSS
+    - &VmessWSS
+      <<: *basevmess
+      name: VSSTsel1
+      server: sg2-v2ray.sshkit.org 
+      port: 443
+      uuid: c6747da4-fb2e-4a2a-bdb7-8614bdd6b0b3
+      servername: sg2-v2ray.sshkit.org
+      strategy: consistent-hashing
+      url: https://dns.alidns.com/dns-query
+      interval: 300
+      ws-opts:
+        path: /sshkit/439427127/642f26c604981/
+        headers:
+          Host: *bug-Tsel1
+          Early-Data: 1
+    - <<: *VmessWSS
+      name: VSSTsel2
+      host: *bug-Tsel2
+    - <<: *VmessWSS
+      name: VSSTsel3
+      host: *bug-Tsel3
+    - <<: *VmessWSS
+      name: VSSTsel4
+      host: *bug-Tsel4
+    - <<: *VmessWSS
+      name: VSSTsel5
+      host: *bug-Tsel5
+    - <<: *VmessWSS
+      name: VSSTsel6
+      host: *bug-Tsel6
+    - <<: *VmessWSS
+      name: VSSTsel7
+      host: *bug-Tsel7
+    - <<: *VmessWSS
+      name: VSSTsel8
+      host: *bug-Tsel8
+    - <<: *VmessWSS
+      name: VSSTsel9
+      host: *bug-Tsel9
+    - <<: *VmessWSS
+      name: VSSTsel10
+      host: *bug-Tsel10
+    - <<: *VmessWSS
+      name: VSSTsel11
+      host: *bug-Tsel11
+    - <<: *VmessWSS
+      name: VSSTsel12
+      host: *bug-Tsel12
+    - <<: *VmessWSS
+      name: VSSTsel13
+      host: *bug-Tsel13
+    - <<: *VmessWSS
+      name: VSSTsel14
+      host: *bug-Tsel14
+    - <<: *VmessWSS
+      name: VSSTsel15
+      host: *bug-Tsel15
+    - <<: *VmessWSS
+      name: VSSTsel16
+      host: *bug-Tsel16
+    - <<: *VmessWSS
+      name: VSSTsel17
+      host: *bug-Tsel17
+    - <<: *VmessWSS
+      name: VSSTsel18
+      host: *bug-Tsel18
+    - <<: *VmessWSS
+      name: VSSTsel19
+      host: *bug-Tsel19
+    - <<: *VmessWSS
+      name: VSSTsel20
+      host: *bug-Tsel20
+    - <<: *VmessWSS
+      name: VSSTsel21
+      host: *bug-Tsel21
+    - <<: *VmessWSS
+      name: VSSTsel22
+      host: *bug-Tsel22
+    - <<: *VmessWSS
+      name: VSSTsel23
+      host: *bug-Tsel23
+    - <<: *VmessWSS
+      name: VSSTsel24
+      host: *bug-Tsel24
+    - <<: *VmessWSS
+      name: VSSTsel25
+      host: *bug-Tsel25
+    - <<: *VmessWSS
+      name: VSSTsel26
+      host: *bug-Tsel26
+    - <<: *VmessWSS
+      name: VSSTsel27
+      host: *bug-Tsel27
+    - <<: *VmessWSS
+      name: VSSTsel28
+      host: *bug-Tsel28
+    - <<: *VmessWSS
+      name: VSSTsel29
+      host: *bug-Tsel29
+    - <<: *VmessWSS
+      name: VSSTsel30
+      host: *bug-Tsel30
+    - <<: *VmessWSS
+      name: VSSTsel31
+      host: *bug-Tsel31
+    - <<: *VmessWSS
+      name: VSSTsel32
+      host: *bug-Tsel32
+    - <<: *VmessWSS
+      name: VSSTsel33
+      host: *bug-Tsel33
+    - <<: *VmessWSS
+      name: VSSTsel34
+      host: *bug-Tsel34
+    - <<: *VmessWSS
+      name: VSSTsel35
+      host: *bug-Tsel35
+    - <<: *VmessWSS
+      name: VSSTsel36
+      host: *bug-Tsel36
+    - <<: *VmessWSS
+      name: VSSTsel37
+      host: *bug-Tsel37
+    - <<: *VmessWSS
+      name: VSSTsel38
+      host: *bug-Tsel38
+    - <<: *VmessWSS
+      name: VSSTsel39
+      host: *bug-Tsel39
+    - <<: *VmessWSS
+      name: VSSTsel40
+      host: *bug-Tsel40
+    - <<: *VmessWSS
+      name: VSSTsel41
+      host: *bug-Tsel41
+    - <<: *VmessWSS
+      name: VSSTsel42
+      host: *bug-Tsel42
+    - <<: *VmessWSS
+      name: VSSTsel43
+      host: *bug-Tsel43
+    - <<: *VmessWSS
+      name: VSSTsel44
+      host: *bug-Tsel44
+    - <<: *VmessWSS
+      name: VSSTsel45
+      host: *bug-Tsel45
+    - <<: *VmessWSS
+      name: VSSTsel46
+      host: *bug-Tsel46
+    - <<: *VmessWSS
+      name: VSSTsel47
+      host: *bug-Tsel47
+    - <<: *VmessWSS
+      name: VSSTsel48
+      host: *bug-Tsel48
+    - <<: *VmessWSS
+      name: VSSTsel49
+      host: *bug-Tsel49
+    - <<: *VmessWSS
+      name: VSSTsel50
+      host: *bug-Tsel50
+    - <<: *VmessWSS
+      name: VSSTsel51
+      host: *bug-Tsel51
+    - <<: *VmessWSS
+      name: VSSTsel52
+      host: *bug-Tsel52
+    - <<: *VmessWSS
+      name: VSSTsel53
+      host: *bug-Tsel53
+    - <<: *VmessWSS
+      name: VSSTsel54
+      host: *bug-Tsel54
+    - <<: *VmessWSS
+      name: VSSTsel55
+      host: *bug-Tsel55
+    - <<: *VmessWSS
+      name: VSSTsel56
+      host: *bug-Tsel56
+    - <<: *VmessWSS
+      name: VSSTsel57
+      host: *bug-Tsel57
+    - <<: *VmessWSS
+      name: VSSTsel58
+      host: *bug-Tsel58
+    - <<: *VmessWSS
+      name: VSSTsel59
+      host: *bug-Tsel59
+    - <<: *VmessWSS
+      name: VSSTsel60
+      host: *bug-Tsel60
+    - <<: *VmessWSS
+      name: VSSTsel61
+      host: *bug-Tsel61
+    - <<: *VmessWSS
+      name: VSSTsel62
+      host: *bug-Tsel62
+    - <<: *VmessWSS
+      name: VSSTsel63
+      host: *bug-Tsel63
+    - <<: *VmessWSS
+      name: VSSTsel64
+      host: *bug-Tsel64
+    - <<: *VmessWSS
+      name: VSSTsel65
+      host: *bug-Tsel65
+    - <<: *VmessWSS
+      name: VSSTsel66
+      host: *bug-Tsel66
+    - <<: *VmessWSS
+      name: VSSTsel67
+      host: *bug-Tsel67
+    - <<: *VmessWSS
+      name: VSSTsel68
+      host: *bug-Tsel68
+    - <<: *VmessWSS
+      name: VSSTsel69
+      host: *bug-Tsel69
+    - <<: *VmessWSS
+      name: VSSTsel70
+      host: *bug-Tsel70
+    - <<: *VmessWSS
+      name: VSSTsel71
+      host: *bug-Tsel71
+    - <<: *VmessWSS
+      name: VSSTsel72
+      host: *bug-Tsel72
+    - <<: *VmessWSS
+      name: VSSTsel73
+      host: *bug-Tsel73
+    - <<: *VmessWSS
+      name: VSSTsel74
+      host: *bug-Tsel74
+    - <<: *VmessWSS
+      name: VSSTsel75
+      host: *bug-Tsel75
+    - <<: *VmessWSS
+      name: VSSTsel76
+      host: *bug-Tsel76
+    - <<: *VmessWSS
+      name: VSSTsel77
+      host: *bug-Tsel77
+    - <<: *VmessWSS
+      name: VSSTsel78
+      host: *bug-Tsel78
+    - <<: *VmessWSS
+      name: VSSTsel79
+      host: *bug-Tsel79
+    - <<: *VmessWSS
+      name: VSSTsel80
+      host: *bug-Tsel80
+    - <<: *VmessWSS
+      name: VSSTsel81
+      host: *bug-Tsel81
+    - <<: *VmessWSS
+      name: VSSTsel82
+      host: *bug-Tsel82
+    - <<: *VmessWSS
+      name: VSSTsel83
+      host: *bug-Tsel83
+    - <<: *VmessWSS
+      name: VSSTsel84
+      host: *bug-Tsel84
+    - <<: *VmessWSS
+      name: VSSTsel85
+      host: *bug-Tsel85
+    - <<: *VmessWSS
+      name: VSSTsel86
+      host: *bug-Tsel86
+    - <<: *VmessWSS
+      name: VSSTsel87
+      host: *bug-Tsel87
+    - <<: *VmessWSS
+      name: VSSTsel88
+      host: *bug-Tsel88
+    - <<: *VmessWSS
+      name: VSSTsel89
+      host: *bug-Tsel89
+    - <<: *VmessWSS
+      name: VSSTsel90
+      host: *bug-Tsel90
+    - <<: *VmessWSS
+      name: VSSTsel91
+      host: *bug-Tsel91
+    - <<: *VmessWSS
+      name: VSSTsel92
+      host: *bug-Tsel92
+    - <<: *VmessWSS
+      name: VSSTsel93
+      host: *bug-Tsel93
+    - <<: *VmessWSS
+      name: VSSTsel94
+      host: *bug-Tsel94
+    - <<: *VmessWSS
+      name: VSSTsel95
+      host: *bug-Tsel95
+    - <<: *VmessWSS
+      name: VSSTsel96
+      host: *bug-Tsel96
+    - <<: *VmessWSS
+      name: VSSTsel97
+      host: *bug-Tsel97
+    - <<: *VmessWSS
+      name: VSSTsel98
+      host: *bug-Tsel98
+    - <<: *VmessWSS
+      name: VSSByu1
+      host: *bug-Byu1
+    - <<: *VmessWSS
+      name: VSSByu2
+      host: *bug-Byu2
+    - <<: *VmessWSS
+      name: VSSByu3
+      host: *bug-Byu3
+    - <<: *VmessWSS
+      name: VSSByu4
+      host: *bug-Byu4
+    - <<: *VmessWSS
+      name: VSSByu5
+      host: *bug-Byu5
+    - <<: *VmessWSS
+      name: VSSByu6
+      host: *bug-Byu6
+    - <<: *VmessWSS
+      name: VSSByu7
+      host: *bug-Byu7
+    - <<: *VmessWSS
+      name: VSSByu8
+      host: *bug-Byu8
+    - <<: *VmessWSS
+      name: VSSByu9
+      host: *bug-Byu9
+    - <<: *VmessWSS
+      name: VSSByu10
+      host: *bug-Byu10
+    - <<: *VmessWSS
+      name: VSSByu11
+      host: *bug-Byu11
+    - <<: *VmessWSS
+      name: VSSByu12
+      host: *bug-Byu12
+    - <<: *VmessWSS
+      name: VSSByu13
+      host: *bug-Byu13
+    - <<: *VmessWSS
+      name: VSSByu14
+      host: *bug-Byu14
+    - <<: *VmessWSS
+      name: VSSByu15
+      host: *bug-Byu15
+    - <<: *VmessWSS
+      name: VSSByu16
+      host: *bug-Byu16
+    - <<: *VmessWSS
+      name: VSSByu17
+      host: *bug-Byu17
+    - <<: *VmessWSS
+      name: VSSByu18
+      host: *bug-Byu18
+    - <<: *VmessWSS
+      name: VSSByu19
+      host: *bug-Byu19
+    - <<: *VmessWSS
+      name: VSSByu20
+      host: *bug-Byu20
+    - <<: *VmessWSS
+      name: VSSByu21
+      host: *bug-Byu21
+    - <<: *VmessWSS
+      name: VSSByu22
+      host: *bug-Byu22
+    - <<: *VmessWSS
+      name: VSSByu23
+      host: *bug-Byu23
+    - <<: *VmessWSS
+      name: VSSByu24
+      host: *bug-Byu24
+    - <<: *VmessWSS
+      name: VSSByu25
+      host: *bug-Byu25
+    - <<: *VmessWSS
+      name: VSSByu26
+      host: *bug-Byu26
+    - <<: *VmessWSS
+      name: VSSByu27
+      host: *bug-Byu27
+    - <<: *VmessWSS
+      name: VSSByu28
+      host: *bug-Byu28
+    - <<: *VmessWSS
+      name: VSSByu29
+      host: *bug-Byu29
+    - <<: *VmessWSS
+      name: VSSByu30
+      host: *bug-Byu30
+    - <<: *VmessWSS
+      name: VSSByu31
+      host: *bug-Byu31
+    - <<: *VmessWSS
+      name: VSSByu32
+      host: *bug-Byu32
+    - <<: *VmessWSS
+      name: VSSByu33
+      host: *bug-Byu33
+    - <<: *VmessWSS
+      name: VSSByu34
+      host: *bug-Byu34
+    - <<: *VmessWSS
+      name: VSSByu35
+      host: *bug-Byu35
+    - <<: *VmessWSS
+      name: VSSByu36
+      host: *bug-Byu36
+    - <<: *VmessWSS
+      name: VSSByu37
+      host: *bug-Byu37
+    - <<: *VmessWSS
+      name: VSSByu38
+      host: *bug-Byu38
+    - <<: *VmessWSS
+      name: VSSByu39
+      host: *bug-Byu39
+    - <<: *VmessWSS
+      name: VSSByu40
+      host: *bug-Byu40
+    - <<: *VmessWSS
+      name: VSSByu41
+      host: *bug-Byu41
+    - <<: *VmessWSS
+      name: VSSByu42
+      host: *bug-Byu42
+    - <<: *VmessWSS
+      name: VSSByu43
+      host: *bug-Byu43
+    - <<: *VmessWSS
+      name: VSSByu44
+      host: *bug-Byu44
+    - <<: *VmessWSS
+      name: VSSByu45
+      host: *bug-Byu45
+    - <<: *VmessWSS
+      name: VSSByu46
+      host: *bug-Byu46
+    - <<: *VmessWSS
+      name: VSSByu47
+      host: *bug-Byu47
+    - <<: *VmessWSS
+      name: VSSByu48
+      host: *bug-Byu48
+    - <<: *VmessWSS
+      name: VSSByu49
+      host: *bug-Byu49
+    - <<: *VmessWSS
+      name: VSSByu50
+      host: *bug-Byu50
+    - <<: *VmessWSS
+      name: VSSByu51
+      host: *bug-Byu51
+    - <<: *VmessWSS
+      name: VSSByu52
+      host: *bug-Byu52
+    - <<: *VmessWSS
+      name: VSSByu53
+      host: *bug-Byu53
+    - <<: *VmessWSS
+      name: VSSByu54
+      host: *bug-Byu54
+    - <<: *VmessWSS
+      name: VSSByu55
+      host: *bug-Byu55
+    - <<: *VmessWSS
+      name: VSSByu56
+      host: *bug-Byu56
+    - <<: *VmessWSS
+      name: VSSByu57
+      host: *bug-Byu57
+    - <<: *VmessWSS
+      name: VSSByu58
+      host: *bug-Byu58
+    - <<: *VmessWSS
+      name: VSSByu59
+      host: *bug-Byu59
+    - <<: *VmessWSS
+      name: VSSByu60
+      host: *bug-Byu60
+    - <<: *VmessWSS
+      name: VSSByu61
+      host: *bug-Byu61
+    - <<: *VmessWSS
+      name: VSSByu62
+      host: *bug-Byu62
+    - <<: *VmessWSS
+      name: VSSByu63
+      host: *bug-Byu63
+    - <<: *VmessWSS
+      name: VSSByu64
+      host: *bug-Byu64
+    - <<: *VmessWSS
+      name: VSSByu65
+      host: *bug-Byu65
+    - <<: *VmessWSS
+      name: VSSByu66
+      host: *bug-Byu66
+    - <<: *VmessWSS
+      name: VSSByu67
+      host: *bug-Byu67
+    - <<: *VmessWSS
+      name: VSSByu68
+      host: *bug-Byu68
+    - <<: *VmessWSS
+      name: VSSByu69
+      host: *bug-Byu69
+    - <<: *VmessWSS
+      name: VSSByu70
+      host: *bug-Byu70
+    - <<: *VmessWSS
+      name: VSSByu71
+      host: *bug-Byu71
+    - <<: *VmessWSS
+      name: VSSByu72
+      host: *bug-Byu72
+    - <<: *VmessWSS
+      name: VSSByu73
+      host: *bug-Byu73
+    - <<: *VmessWSS
+      name: VSSByu74
+      host: *bug-Byu74
+    - <<: *VmessWSS
+      name: VSSByu75
+      host: *bug-Byu75
+    - <<: *VmessWSS
+      name: VSSByu76
+      host: *bug-Byu76
+    - <<: *VmessWSS
+      name: VSSByu77
+      host: *bug-Byu77
+    - <<: *VmessWSS
+      name: VSSByu78
+      host: *bug-Byu78
+    - <<: *VmessWSS
+      name: VSSByu79
+      host: *bug-Byu79
+    - <<: *VmessWSS
+      name: VSSByu80
+      host: *bug-Byu80
+    - <<: *VmessWSS
+      name: VSSByu81
+      host: *bug-Byu81
+    - <<: *VmessWSS
+      name: VSSByu82
+      host: *bug-Byu82
+    - <<: *VmessWSS
+      name: VSSByu83
+      host: *bug-Byu83
+    - <<: *VmessWSS
+      name: VSSXL1
+      host: *bug-XL1
+    - <<: *VmessWSS
+      name: VSSXL2
+      host: *bug-XL2
+    - <<: *VmessWSS
+      name: VSSXL3
+      host: *bug-XL3
+    - <<: *VmessWSS
+      name: VSSXL4
+      host: *bug-XL4
+    - <<: *VmessWSS
+      name: VSSXL5
+      host: *bug-XL5
+    - <<: *VmessWSS
+      name: VSSXL6
+      host: *bug-XL6
+    - <<: *VmessWSS
+      name: VSSXL7
+      host: *bug-XL7
+    - <<: *VmessWSS
+      name: VSSXL8
+      host: *bug-XL8
+    - <<: *VmessWSS
+      name: VSSXL9
+      host: *bug-XL9
+    - <<: *VmessWSS
+      name: VSSXL10
+      host: *bug-XL10
+    - <<: *VmessWSS
+      name: VSSXL11
+      host: *bug-XL11
+    - <<: *VmessWSS
+      name: VSSXL12
+      host: *bug-XL12
+    - <<: *VmessWSS
+      name: VSSXL13
+      host: *bug-XL13
+    - <<: *VmessWSS
+      name: VSSXL14
+      host: *bug-XL14
+    - <<: *VmessWSS
+      name: VSSXL15
+      host: *bug-XL15
+    - <<: *VmessWSS
+      name: VSSXL16
+      host: *bug-XL16
+    - <<: *VmessWSS
+      name: VSSXL17
+      host: *bug-XL17
+    - <<: *VmessWSS
+      name: VSSXL18
+      host: *bug-XL18
+    - <<: *VmessWSS
+      name: VSSXL19
+      host: *bug-XL19
+    - <<: *VmessWSS
+      name: VSSXL20
+      host: *bug-XL20
+    - <<: *VmessWSS
+      name: VSSXL21
+      host: *bug-XL21
+    - <<: *VmessWSS
+      name: VSSXL22
+      host: *bug-XL22
+    - <<: *VmessWSS
+      name: VSSXL23
+      host: *bug-XL23
+    - <<: *VmessWSS
+      name: VSSXL24
+      host: *bug-XL24
+    - <<: *VmessWSS
+      name: VSSXL25
+      host: *bug-XL25
+    - <<: *VmessWSS
+      name: VSSXL26
+      host: *bug-XL26
+    - <<: *VmessWSS
+      name: VSSXL27
+      host: *bug-XL27
+    - <<: *VmessWSS
+      name: VSSXL28
+      host: *bug-XL28
+    - <<: *VmessWSS
+      name: VSSXL29
+      host: *bug-XL29
+    - <<: *VmessWSS
+      name: VSSXL30
+      host: *bug-XL30
+    - <<: *VmessWSS
+      name: VSSXL31
+      host: *bug-XL31
+    - <<: *VmessWSS
+      name: VSSXL32
+      host: *bug-XL32
+    - <<: *VmessWSS
+      name: VSSXL33
+      host: *bug-XL33
+    - <<: *VmessWSS
+      name: VSSXL34
+      host: *bug-XL34
+    - <<: *VmessWSS
+      name: VSSXL35
+      host: *bug-XL35
+    - <<: *VmessWSS
+      name: VSSXL36
+      host: *bug-XL36
+    - <<: *VmessWSS
+      name: VSSXL37
+      host: *bug-XL37
+    - <<: *VmessWSS
+      name: VSSXL38
+      host: *bug-XL38
+    - <<: *VmessWSS
+      name: VSSXL39
+      host: *bug-XL39
+    - <<: *VmessWSS
+      name: VSSXL40
+      host: *bug-XL40
+    - <<: *VmessWSS
+      name: VSSXL41
+      host: *bug-XL41
+    - <<: *VmessWSS
+      name: VSSXL42
+      host: *bug-XL42
+    - <<: *VmessWSS
+      name: VSSXL43
+      host: *bug-XL43
+    - <<: *VmessWSS
+      name: VSSXL44
+      host: *bug-XL44
+    - <<: *VmessWSS
+      name: VSSXL45
+      host: *bug-XL45
+    - <<: *VmessWSS
+      name: VSSXL46
+      host: *bug-XL46
+    - <<: *VmessWSS
+      name: VSSXL47
+      host: *bug-XL47
+    - <<: *VmessWSS
+      name: VSSXL48
+      host: *bug-XL48
+    - <<: *VmessWSS
+      name: VSSXL49
+      host: *bug-XL49
+    - <<: *VmessWSS
+      name: VSSXL50
+      host: *bug-XL50
+    - <<: *VmessWSS
+      name: VSSXL51
+      host: *bug-XL51
+    - <<: *VmessWSS
+      name: VSSXL52
+      host: *bug-XL52
+    - <<: *VmessWSS
+      name: VSSXL53
+      host: *bug-XL53
+    - <<: *VmessWSS
+      name: VSSXL54
+      host: *bug-XL54
+    - <<: *VmessWSS
+      name: VSSXL55
+      host: *bug-XL55
+    - <<: *VmessWSS
+      name: VSSXL56
+      host: *bug-XL56
+    - <<: *VmessWSS
+      name: VSSXL57
+      host: *bug-XL57
+    - <<: *VmessWSS
+      name: VSSXL58
+      host: *bug-XL58
+    - <<: *VmessWSS
+      name: VSSXL59
+      host: *bug-XL59
+    - <<: *VmessWSS
+      name: VSSXL60
+      host: *bug-XL60
+    - <<: *VmessWSS
+      name: VSSXL61
+      host: *bug-XL61
+    - <<: *VmessWSS
+      name: VSSXL62
+      host: *bug-XL62
+    - <<: *VmessWSS
+      name: VSSXL63
+      host: *bug-XL63
+    - <<: *VmessWSS
+      name: VSSXL64
+      host: *bug-XL64
+    - <<: *VmessWSS
+      name: VSSXL65
+      host: *bug-XL65
+    - <<: *VmessWSS
+      name: VSSXL66
+      host: *bug-XL66
+    - <<: *VmessWSS
+      name: VSSXL67
+      host: *bug-XL67
+    - <<: *VmessWSS
+      name: VSSXL68
+      host: *bug-XL68
+    - <<: *VmessWSS
+      name: VSSXL69
+      host: *bug-XL69
+    - <<: *VmessWSS
+      name: VSSXL70
+      host: *bug-XL70
+    - <<: *VmessWSS
+      name: VSSXL71
+      host: *bug-XL71
+    - <<: *VmessWSS
+      name: VSSXL72
+      host: *bug-XL72
+    - <<: *VmessWSS
+      name: VSSXL73
+      host: *bug-XL73
+    - <<: *VmessWSS
+      name: VSSXL74
+      host: *bug-XL74
+    - <<: *VmessWSS
+      name: VSSXL75
+      host: *bug-XL75
+    - <<: *VmessWSS
+      name: VSSXL76
+      host: *bug-XL76
+    - <<: *VmessWSS
+      name: VSSXL77
+      host: *bug-XL77
+    - <<: *VmessWSS
+      name: VSSXL78
+      host: *bug-XL78
+    - <<: *VmessWSS
+      name: VSSXL79
+      host: *bug-XL79
+    - <<: *VmessWSS
+      name: VSSXL80
+      host: *bug-XL80
+    - <<: *VmessWSS
+      name: VSSXL81
+      host: *bug-XL81
+    - <<: *VmessWSS
+      name: VSSXL82
+      host: *bug-XL82
+    - <<: *VmessWSS
+      name: VSSXL83
+      host: *bug-XL83
+    - <<: *VmessWSS
+      name: VSSXL84
+      host: *bug-XL84
+    - <<: *VmessWSS
+      name: VSSXL85
+      host: *bug-XL85
+    - <<: *VmessWSS
+      name: VSSXL86
+      host: *bug-XL86
+    - <<: *VmessWSS
+      name: VSSXL87
+      host: *bug-XL87
+    - <<: *VmessWSS
+      name: VSSXL88
+      host: *bug-XL88
+    - <<: *VmessWSS
+      name: VSSXL89
+      host: *bug-XL89
+    - <<: *VmessWSS
+      name: VSSXL90
+      host: *bug-XL90
+    - <<: *VmessWSS
+      name: VSSXL91
+      host: *bug-XL91
+    - <<: *VmessWSS
+      name: VSSXL92
+      host: *bug-XL92
+    - <<: *VmessWSS
+      name: VSSXL93
+      host: *bug-XL93
+    - <<: *VmessWSS
+      name: VSSXL94
+      host: *bug-XL94
+    - <<: *VmessWSS
+      name: VSSXL95
+      host: *bug-XL95
+    - <<: *VmessWSS
+      name: VSSXL96
+      host: *bug-XL96
+    - <<: *VmessWSS
+      name: VSSXL97
+      host: *bug-XL97
+    - <<: *VmessWSS
+      name: VSSXL98
+      host: *bug-XL98
+    - <<: *VmessWSS
+      name: VSSIsat1
+      host: *bug-Isat1
+    - <<: *VmessWSS
+      name: VSSIsat2
+      host: *bug-Isat2
+    - <<: *VmessWSS
+      name: VSSIsat3
+      host: *bug-Isat3
+    - <<: *VmessWSS
+      name: VSSIsat4
+      host: *bug-Isat4
+    - <<: *VmessWSS
+      name: VSSIsat5
+      host: *bug-Isat5
+    - <<: *VmessWSS
+      name: VSSIsat6
+      host: *bug-Isat6
+    - <<: *VmessWSS
+      name: VSSIsat7
+      host: *bug-Isat7
+    - <<: *VmessWSS
+      name: VSSIsat8
+      host: *bug-Isat8
+    - <<: *VmessWSS
+      name: VSSIsat9
+      host: *bug-Isat9
+    - <<: *VmessWSS
+      name: VSSIsat10
+      host: *bug-Isat10
+    - <<: *VmessWSS
+      name: VSSIsat11
+      host: *bug-Isat11
+    - <<: *VmessWSS
+      name: VSSIsat12
+      host: *bug-Isat12
+    - <<: *VmessWSS
+      name: VSSIsat13
+      host: *bug-Isat13
+    - <<: *VmessWSS
+      name: VSSIsat14
+      host: *bug-Isat14
+    - <<: *VmessWSS
+      name: VSSIsat15
+      host: *bug-Isat15
+    - <<: *VmessWSS
+      name: VSSIsat16
+      host: *bug-Isat16
+    - <<: *VmessWSS
+      name: VSSIsat17
+      host: *bug-Isat17
+    - <<: *VmessWSS
+      name: VSSIsat18
+      host: *bug-Isat18
+    - <<: *VmessWSS
+      name: VSSIsat19
+      host: *bug-Isat19
+    - <<: *VmessWSS
+      name: VSSIsat20
+      host: *bug-Isat20
+    - <<: *VmessWSS
+      name: VSSIsat21
+      host: *bug-Isat21
+    - <<: *VmessWSS
+      name: VSSIsat22
+      host: *bug-Isat22
+    - <<: *VmessWSS
+      name: VSSIsat23
+      host: *bug-Isat23
+    - <<: *VmessWSS
+      name: VSSIsat24
+      host: *bug-Isat24
+    - <<: *VmessWSS
+      name: VSSIsat25
+      host: *bug-Isat25
+    - <<: *VmessWSS
+      name: VSSIsat26
+      host: *bug-Isat26
+    - <<: *VmessWSS
+      name: VSSIsat27
+      host: *bug-Isat27
+    - <<: *VmessWSS
+      name: VSSIsat28
+      host: *bug-Isat28
+    - <<: *VmessWSS
+      name: VSSIsat29
+      host: *bug-Isat29
+    - <<: *VmessWSS
+      name: VSSIsat30
+      host: *bug-Isat30
+    - <<: *VmessWSS
+      name: VSSIsat31
+      host: *bug-Isat31
+    - <<: *VmessWSS
+      name: VSSIsat32
+      host: *bug-Isat32
+    - <<: *VmessWSS
+      name: VSSIsat33
+      host: *bug-Isat33
+    - <<: *VmessWSS
+      name: VSSIsat34
+      host: *bug-Isat34
+    - <<: *VmessWSS
+      name: VSSIsat35
+      host: *bug-Isat35
+    - <<: *VmessWSS
+      name: VSSIsat36
+      host: *bug-Isat36
+    - <<: *VmessWSS
+      name: VSSIsat37
+      host: *bug-Isat37
+    - <<: *VmessWSS
+      name: VSSIsat38
+      host: *bug-Isat38
+    - <<: *VmessWSS
+      name: VSSIsat39
+      host: *bug-Isat39
+    - <<: *VmessWSS
+      name: VSSIsat40
+      host: *bug-Isat40
+    - <<: *VmessWSS
+      name: VSSIsat41
+      host: *bug-Isat41
+    - <<: *VmessWSS
+      name: VSSIsat42
+      host: *bug-Isat42
+    - <<: *VmessWSS
+      name: VSSIsat43
+      host: *bug-Isat43
+    - <<: *VmessWSS
+      name: VSSIsat44
+      host: *bug-Isat44
+    - <<: *VmessWSS
+      name: VSSIsat45
+      host: *bug-Isat45
+    - <<: *VmessWSS
+      name: VSSIsat46
+      host: *bug-Isat46
+    - <<: *VmessWSS
+      name: VSSIsat47
+      host: *bug-Isat47
+    - <<: *VmessWSS
+      name: VSSIsat48
+      host: *bug-Isat48
+    - <<: *VmessWSS
+      name: VSSIsat49
+      host: *bug-Isat49
+    - <<: *VmessWSS
+      name: VSSIsat50
+      host: *bug-Isat50
+    - <<: *VmessWSS
+      name: VSSIsat51
+      host: *bug-Isat51
+    - <<: *VmessWSS
+      name: VSSIsat52
+      host: *bug-Isat52
+    - <<: *VmessWSS
+      name: VSSIsat53
+      host: *bug-Isat53
+    - <<: *VmessWSS
+      name: VSSIsat54
+      host: *bug-Isat54
+    - <<: *VmessWSS
+      name: VSSIsat55
+      host: *bug-Isat55
+    - <<: *VmessWSS
+      name: VSSIsat56
+      host: *bug-Isat56
+    - <<: *VmessWSS
+      name: VSSIsat57
+      host: *bug-Isat57
+    - <<: *VmessWSS
+      name: VSSIsat58
+      host: *bug-Isat58
+    - <<: *VmessWSS
+      name: VSSIsat59
+      host: *bug-Isat59
+    - <<: *VmessWSS
+      name: VSSIsat60
+      host: *bug-Isat60
+    - <<: *VmessWSS
+      name: VSSIsat61
+      host: *bug-Isat61
+    - <<: *VmessWSS
+      name: VSSIsat62
+      host: *bug-Isat62
+    - <<: *VmessWSS
+      name: VSSIsat63
+      host: *bug-Isat63
+    - <<: *VmessWSS
+      name: VSSIsat64
+      host: *bug-Isat64
+    - <<: *VmessWSS
+      name: VSSIsat65
+      host: *bug-Isat65
+    - <<: *VmessWSS
+      name: VSSIsat66
+      host: *bug-Isat66
+    - <<: *VmessWSS
+      name: VSSIsat67
+      host: *bug-Isat67
+    - <<: *VmessWSS
+      name: VSSIsat68
+      host: *bug-Isat68
+    - <<: *VmessWSS
+      name: VSSIsat69
+      host: *bug-Isat69
+    - <<: *VmessWSS
+      name: VSSIsat70
+      host: *bug-Isat70
+    - <<: *VmessWSS
+      name: VSSIsat71
+      host: *bug-Isat71
+    - <<: *VmessWSS
+      name: VSSIsat72
+      host: *bug-Isat72
+    - <<: *VmessWSS
+      name: VSSIsat73
+      host: *bug-Isat73
+    - <<: *VmessWSS
+      name: VSSIsat74
+      host: *bug-Isat74
+    - <<: *VmessWSS
+      name: VSSIsat75
+      host: *bug-Isat75
+    - <<: *VmessWSS
+      name: VSSIsat76
+      host: *bug-Isat76
+    - <<: *VmessWSS
+      name: VSSSmar1
+      host: *bug-Smar1
+    - <<: *VmessWSS
+      name: VSSSmar2
+      host: *bug-Smar2
+    - <<: *VmessWSS
+      name: VSSSmar3
+      host: *bug-Smar3
+    - <<: *VmessWSS
+      name: VSSSmar4
+      host: *bug-Smar4
+    - <<: *VmessWSS
+      name: VSSSmar5
+      host: *bug-Smar5
+    - <<: *VmessWSS
+      name: VSSSmar6
+      host: *bug-Smar6
+    - <<: *VmessWSS
+      name: VSSSmar7
+      host: *bug-Smar7
+    - <<: *VmessWSS
+      name: VSSSmar8
+      host: *bug-Smar8
+    - <<: *VmessWSS
+      name: VSSSmar9
+      host: *bug-Smar9
+    - <<: *VmessWSS
+      name: VSSSmar10
+      host: *bug-Smar10
+    - <<: *VmessWSS
+      name: VSSSmar11
+      host: *bug-Smar11
+    - <<: *VmessWSS
+      name: VSSSmar12
+      host: *bug-Smar12
+    - <<: *VmessWSS
+      name: VSSSmar13
+      host: *bug-Smar13
+    - <<: *VmessWSS
+      name: VSSSmar14
+      host: *bug-Smar14
+    - <<: *VmessWSS
+      name: VSSSmar15
+      host: *bug-Smar15
+    - <<: *VmessWSS
+      name: VSSSmar16
+      host: *bug-Smar16
+    - <<: *VmessWSS
+      name: VSSSmar17
+      host: *bug-Smar17
+    - <<: *VmessWSS
+      name: VSSSmar18
+      host: *bug-Smar18
+
+#VmessWSCDN
+    - &VmessWSCDN
+      <<: *basevmess
+      name: VSCTsel1
+      server: *bug-Tsel1 
+      port: 443
+      uuid: c6747da4-fb2e-4a2a-bdb7-8614bdd6b0b3
+      servername: sg2-v2ray.sshkit.org
+      strategy: consistent-hashing
+      url: https://dns.alidns.com/dns-query
+      interval: 300
+      ws-opts:
+        path: /sshkit/439427127/642f26c604981/
+        headers:
+          Host: sg2-v2ray.sshkit.org
+          X-Online-Host: tor.cloudflare-dns.com
+          X-Forward-Host: tor.cloudflare-dns.com
+          Early-Data: 1
+    - <<: *VmessWSCDN
+      name: VSCTsel2
+      server: *bug-Tsel2
+    - <<: *VmessWSCDN
+      name: VSCTsel3
+      server: *bug-Tsel3
+    - <<: *VmessWSCDN
+      name: VSCTsel4
+      server: *bug-Tsel4
+    - <<: *VmessWSCDN
+      name: VSCTsel5
+      server: *bug-Tsel5
+    - <<: *VmessWSCDN
+      name: VSCTsel6
+      server: *bug-Tsel6
+    - <<: *VmessWSCDN
+      name: VSCTsel7
+      server: *bug-Tsel7
+    - <<: *VmessWSCDN
+      name: VSCTsel8
+      server: *bug-Tsel8
+    - <<: *VmessWSCDN
+      name: VSCTsel9
+      server: *bug-Tsel9
+    - <<: *VmessWSCDN
+      name: VSCTsel10
+      server: *bug-Tsel10
+    - <<: *VmessWSCDN
+      name: VSCTsel11
+      server: *bug-Tsel11
+    - <<: *VmessWSCDN
+      name: VSCTsel12
+      server: *bug-Tsel12
+    - <<: *VmessWSCDN
+      name: VSCTsel13
+      server: *bug-Tsel13
+    - <<: *VmessWSCDN
+      name: VSCTsel14
+      server: *bug-Tsel14
+    - <<: *VmessWSCDN
+      name: VSCTsel15
+      server: *bug-Tsel15
+    - <<: *VmessWSCDN
+      name: VSCTsel16
+      server: *bug-Tsel16
+    - <<: *VmessWSCDN
+      name: VSCTsel17
+      server: *bug-Tsel17
+    - <<: *VmessWSCDN
+      name: VSCTsel18
+      server: *bug-Tsel18
+    - <<: *VmessWSCDN
+      name: VSCTsel19
+      server: *bug-Tsel19
+    - <<: *VmessWSCDN
+      name: VSCTsel20
+      server: *bug-Tsel20
+    - <<: *VmessWSCDN
+      name: VSCTsel21
+      server: *bug-Tsel21
+    - <<: *VmessWSCDN
+      name: VSCTsel22
+      server: *bug-Tsel22
+    - <<: *VmessWSCDN
+      name: VSCTsel23
+      server: *bug-Tsel23
+    - <<: *VmessWSCDN
+      name: VSCTsel24
+      server: *bug-Tsel24
+    - <<: *VmessWSCDN
+      name: VSCTsel25
+      server: *bug-Tsel25
+    - <<: *VmessWSCDN
+      name: VSCTsel26
+      server: *bug-Tsel26
+    - <<: *VmessWSCDN
+      name: VSCTsel27
+      server: *bug-Tsel27
+    - <<: *VmessWSCDN
+      name: VSCTsel28
+      server: *bug-Tsel28
+    - <<: *VmessWSCDN
+      name: VSCTsel29
+      server: *bug-Tsel29
+    - <<: *VmessWSCDN
+      name: VSCTsel30
+      server: *bug-Tsel30
+    - <<: *VmessWSCDN
+      name: VSCTsel31
+      server: *bug-Tsel31
+    - <<: *VmessWSCDN
+      name: VSCTsel32
+      server: *bug-Tsel32
+    - <<: *VmessWSCDN
+      name: VSCTsel33
+      server: *bug-Tsel33
+    - <<: *VmessWSCDN
+      name: VSCTsel34
+      server: *bug-Tsel34
+    - <<: *VmessWSCDN
+      name: VSCTsel35
+      server: *bug-Tsel35
+    - <<: *VmessWSCDN
+      name: VSCTsel36
+      server: *bug-Tsel36
+    - <<: *VmessWSCDN
+      name: VSCTsel37
+      server: *bug-Tsel37
+    - <<: *VmessWSCDN
+      name: VSCTsel38
+      server: *bug-Tsel38
+    - <<: *VmessWSCDN
+      name: VSCTsel39
+      server: *bug-Tsel39
+    - <<: *VmessWSCDN
+      name: VSCTsel40
+      server: *bug-Tsel40
+    - <<: *VmessWSCDN
+      name: VSCTsel41
+      server: *bug-Tsel41
+    - <<: *VmessWSCDN
+      name: VSCTsel42
+      server: *bug-Tsel42
+    - <<: *VmessWSCDN
+      name: VSCTsel43
+      server: *bug-Tsel43
+    - <<: *VmessWSCDN
+      name: VSCTsel44
+      server: *bug-Tsel44
+    - <<: *VmessWSCDN
+      name: VSCTsel45
+      server: *bug-Tsel45
+    - <<: *VmessWSCDN
+      name: VSCTsel46
+      server: *bug-Tsel46
+    - <<: *VmessWSCDN
+      name: VSCTsel47
+      server: *bug-Tsel47
+    - <<: *VmessWSCDN
+      name: VSCTsel48
+      server: *bug-Tsel48
+    - <<: *VmessWSCDN
+      name: VSCTsel49
+      server: *bug-Tsel49
+    - <<: *VmessWSCDN
+      name: VSCTsel50
+      server: *bug-Tsel50
+    - <<: *VmessWSCDN
+      name: VSCTsel51
+      server: *bug-Tsel51
+    - <<: *VmessWSCDN
+      name: VSCTsel52
+      server: *bug-Tsel52
+    - <<: *VmessWSCDN
+      name: VSCTsel53
+      server: *bug-Tsel53
+    - <<: *VmessWSCDN
+      name: VSCTsel54
+      server: *bug-Tsel54
+    - <<: *VmessWSCDN
+      name: VSCTsel55
+      server: *bug-Tsel55
+    - <<: *VmessWSCDN
+      name: VSCTsel56
+      server: *bug-Tsel56
+    - <<: *VmessWSCDN
+      name: VSCTsel57
+      server: *bug-Tsel57
+    - <<: *VmessWSCDN
+      name: VSCTsel58
+      server: *bug-Tsel58
+    - <<: *VmessWSCDN
+      name: VSCTsel59
+      server: *bug-Tsel59
+    - <<: *VmessWSCDN
+      name: VSCTsel60
+      server: *bug-Tsel60
+    - <<: *VmessWSCDN
+      name: VSCTsel61
+      server: *bug-Tsel61
+    - <<: *VmessWSCDN
+      name: VSCTsel62
+      server: *bug-Tsel62
+    - <<: *VmessWSCDN
+      name: VSCTsel63
+      server: *bug-Tsel63
+    - <<: *VmessWSCDN
+      name: VSCTsel64
+      server: *bug-Tsel64
+    - <<: *VmessWSCDN
+      name: VSCTsel65
+      server: *bug-Tsel65
+    - <<: *VmessWSCDN
+      name: VSCTsel66
+      server: *bug-Tsel66
+    - <<: *VmessWSCDN
+      name: VSCTsel67
+      server: *bug-Tsel67
+    - <<: *VmessWSCDN
+      name: VSCTsel68
+      server: *bug-Tsel68
+    - <<: *VmessWSCDN
+      name: VSCTsel69
+      server: *bug-Tsel69
+    - <<: *VmessWSCDN
+      name: VSCTsel70
+      server: *bug-Tsel70
+    - <<: *VmessWSCDN
+      name: VSCTsel71
+      server: *bug-Tsel71
+    - <<: *VmessWSCDN
+      name: VSCTsel72
+      server: *bug-Tsel72
+    - <<: *VmessWSCDN
+      name: VSCTsel73
+      server: *bug-Tsel73
+    - <<: *VmessWSCDN
+      name: VSCTsel74
+      server: *bug-Tsel74
+    - <<: *VmessWSCDN
+      name: VSCTsel75
+      server: *bug-Tsel75
+    - <<: *VmessWSCDN
+      name: VSCTsel76
+      server: *bug-Tsel76
+    - <<: *VmessWSCDN
+      name: VSCTsel77
+      server: *bug-Tsel77
+    - <<: *VmessWSCDN
+      name: VSCTsel78
+      server: *bug-Tsel78
+    - <<: *VmessWSCDN
+      name: VSCTsel79
+      server: *bug-Tsel79
+    - <<: *VmessWSCDN
+      name: VSCTsel80
+      server: *bug-Tsel80
+    - <<: *VmessWSCDN
+      name: VSCTsel81
+      server: *bug-Tsel81
+    - <<: *VmessWSCDN
+      name: VSCTsel82
+      server: *bug-Tsel82
+    - <<: *VmessWSCDN
+      name: VSCTsel83
+      server: *bug-Tsel83
+    - <<: *VmessWSCDN
+      name: VSCTsel84
+      server: *bug-Tsel84
+    - <<: *VmessWSCDN
+      name: VSCTsel85
+      server: *bug-Tsel85
+    - <<: *VmessWSCDN
+      name: VSCTsel86
+      server: *bug-Tsel86
+    - <<: *VmessWSCDN
+      name: VSCTsel87
+      server: *bug-Tsel87
+    - <<: *VmessWSCDN
+      name: VSCTsel88
+      server: *bug-Tsel88
+    - <<: *VmessWSCDN
+      name: VSCTsel89
+      server: *bug-Tsel89
+    - <<: *VmessWSCDN
+      name: VSCTsel90
+      server: *bug-Tsel90
+    - <<: *VmessWSCDN
+      name: VSCTsel91
+      server: *bug-Tsel91
+    - <<: *VmessWSCDN
+      name: VSCTsel92
+      server: *bug-Tsel92
+    - <<: *VmessWSCDN
+      name: VSCTsel93
+      server: *bug-Tsel93
+    - <<: *VmessWSCDN
+      name: VSCTsel94
+      server: *bug-Tsel94
+    - <<: *VmessWSCDN
+      name: VSCTsel95
+      server: *bug-Tsel95
+    - <<: *VmessWSCDN
+      name: VSCTsel96
+      server: *bug-Tsel96
+    - <<: *VmessWSCDN
+      name: VSCTsel97
+      server: *bug-Tsel97
+    - <<: *VmessWSCDN
+      name: VSCTsel98
+      server: *bug-Tsel98
+    - <<: *VmessWSCDN
+      name: VSCByu1
+      server: *bug-Byu1
+    - <<: *VmessWSCDN
+      name: VSCByu2
+      server: *bug-Byu2
+    - <<: *VmessWSCDN
+      name: VSCByu3
+      server: *bug-Byu3
+    - <<: *VmessWSCDN
+      name: VSCByu4
+      server: *bug-Byu4
+    - <<: *VmessWSCDN
+      name: VSCByu5
+      server: *bug-Byu5
+    - <<: *VmessWSCDN
+      name: VSCByu6
+      server: *bug-Byu6
+    - <<: *VmessWSCDN
+      name: VSCByu7
+      server: *bug-Byu7
+    - <<: *VmessWSCDN
+      name: VSCByu8
+      server: *bug-Byu8
+    - <<: *VmessWSCDN
+      name: VSCByu9
+      server: *bug-Byu9
+    - <<: *VmessWSCDN
+      name: VSCByu10
+      server: *bug-Byu10
+    - <<: *VmessWSCDN
+      name: VSCByu11
+      server: *bug-Byu11
+    - <<: *VmessWSCDN
+      name: VSCByu12
+      server: *bug-Byu12
+    - <<: *VmessWSCDN
+      name: VSCByu13
+      server: *bug-Byu13
+    - <<: *VmessWSCDN
+      name: VSCByu14
+      server: *bug-Byu14
+    - <<: *VmessWSCDN
+      name: VSCByu15
+      server: *bug-Byu15
+    - <<: *VmessWSCDN
+      name: VSCByu16
+      server: *bug-Byu16
+    - <<: *VmessWSCDN
+      name: VSCByu17
+      server: *bug-Byu17
+    - <<: *VmessWSCDN
+      name: VSCByu18
+      server: *bug-Byu18
+    - <<: *VmessWSCDN
+      name: VSCByu19
+      server: *bug-Byu19
+    - <<: *VmessWSCDN
+      name: VSCByu20
+      server: *bug-Byu20
+    - <<: *VmessWSCDN
+      name: VSCByu21
+      server: *bug-Byu21
+    - <<: *VmessWSCDN
+      name: VSCByu22
+      server: *bug-Byu22
+    - <<: *VmessWSCDN
+      name: VSCByu23
+      server: *bug-Byu23
+    - <<: *VmessWSCDN
+      name: VSCByu24
+      server: *bug-Byu24
+    - <<: *VmessWSCDN
+      name: VSCByu25
+      server: *bug-Byu25
+    - <<: *VmessWSCDN
+      name: VSCByu26
+      server: *bug-Byu26
+    - <<: *VmessWSCDN
+      name: VSCByu27
+      server: *bug-Byu27
+    - <<: *VmessWSCDN
+      name: VSCByu28
+      server: *bug-Byu28
+    - <<: *VmessWSCDN
+      name: VSCByu29
+      server: *bug-Byu29
+    - <<: *VmessWSCDN
+      name: VSCByu30
+      server: *bug-Byu30
+    - <<: *VmessWSCDN
+      name: VSCByu31
+      server: *bug-Byu31
+    - <<: *VmessWSCDN
+      name: VSCByu32
+      server: *bug-Byu32
+    - <<: *VmessWSCDN
+      name: VSCByu33
+      server: *bug-Byu33
+    - <<: *VmessWSCDN
+      name: VSCByu34
+      server: *bug-Byu34
+    - <<: *VmessWSCDN
+      name: VSCByu35
+      server: *bug-Byu35
+    - <<: *VmessWSCDN
+      name: VSCByu36
+      server: *bug-Byu36
+    - <<: *VmessWSCDN
+      name: VSCByu37
+      server: *bug-Byu37
+    - <<: *VmessWSCDN
+      name: VSCByu38
+      server: *bug-Byu38
+    - <<: *VmessWSCDN
+      name: VSCByu39
+      server: *bug-Byu39
+    - <<: *VmessWSCDN
+      name: VSCByu40
+      server: *bug-Byu40
+    - <<: *VmessWSCDN
+      name: VSCByu41
+      server: *bug-Byu41
+    - <<: *VmessWSCDN
+      name: VSCByu42
+      server: *bug-Byu42
+    - <<: *VmessWSCDN
+      name: VSCByu43
+      server: *bug-Byu43
+    - <<: *VmessWSCDN
+      name: VSCByu44
+      server: *bug-Byu44
+    - <<: *VmessWSCDN
+      name: VSCByu45
+      server: *bug-Byu45
+    - <<: *VmessWSCDN
+      name: VSCByu46
+      server: *bug-Byu46
+    - <<: *VmessWSCDN
+      name: VSCByu47
+      server: *bug-Byu47
+    - <<: *VmessWSCDN
+      name: VSCByu48
+      server: *bug-Byu48
+    - <<: *VmessWSCDN
+      name: VSCByu49
+      server: *bug-Byu49
+    - <<: *VmessWSCDN
+      name: VSCByu50
+      server: *bug-Byu50
+    - <<: *VmessWSCDN
+      name: VSCByu51
+      server: *bug-Byu51
+    - <<: *VmessWSCDN
+      name: VSCByu52
+      server: *bug-Byu52
+    - <<: *VmessWSCDN
+      name: VSCByu53
+      server: *bug-Byu53
+    - <<: *VmessWSCDN
+      name: VSCByu54
+      server: *bug-Byu54
+    - <<: *VmessWSCDN
+      name: VSCByu55
+      server: *bug-Byu55
+    - <<: *VmessWSCDN
+      name: VSCByu56
+      server: *bug-Byu56
+    - <<: *VmessWSCDN
+      name: VSCByu57
+      server: *bug-Byu57
+    - <<: *VmessWSCDN
+      name: VSCByu58
+      server: *bug-Byu58
+    - <<: *VmessWSCDN
+      name: VSCByu59
+      server: *bug-Byu59
+    - <<: *VmessWSCDN
+      name: VSCByu60
+      server: *bug-Byu60
+    - <<: *VmessWSCDN
+      name: VSCByu61
+      server: *bug-Byu61
+    - <<: *VmessWSCDN
+      name: VSCByu62
+      server: *bug-Byu62
+    - <<: *VmessWSCDN
+      name: VSCByu63
+      server: *bug-Byu63
+    - <<: *VmessWSCDN
+      name: VSCByu64
+      server: *bug-Byu64
+    - <<: *VmessWSCDN
+      name: VSCByu65
+      server: *bug-Byu65
+    - <<: *VmessWSCDN
+      name: VSCByu66
+      server: *bug-Byu66
+    - <<: *VmessWSCDN
+      name: VSCByu67
+      server: *bug-Byu67
+    - <<: *VmessWSCDN
+      name: VSCByu68
+      server: *bug-Byu68
+    - <<: *VmessWSCDN
+      name: VSCByu69
+      server: *bug-Byu69
+    - <<: *VmessWSCDN
+      name: VSCByu70
+      server: *bug-Byu70
+    - <<: *VmessWSCDN
+      name: VSCByu71
+      server: *bug-Byu71
+    - <<: *VmessWSCDN
+      name: VSCByu72
+      server: *bug-Byu72
+    - <<: *VmessWSCDN
+      name: VSCByu73
+      server: *bug-Byu73
+    - <<: *VmessWSCDN
+      name: VSCByu74
+      server: *bug-Byu74
+    - <<: *VmessWSCDN
+      name: VSCByu75
+      server: *bug-Byu75
+    - <<: *VmessWSCDN
+      name: VSCByu76
+      server: *bug-Byu76
+    - <<: *VmessWSCDN
+      name: VSCByu77
+      server: *bug-Byu77
+    - <<: *VmessWSCDN
+      name: VSCByu78
+      server: *bug-Byu78
+    - <<: *VmessWSCDN
+      name: VSCByu79
+      server: *bug-Byu79
+    - <<: *VmessWSCDN
+      name: VSCByu80
+      server: *bug-Byu80
+    - <<: *VmessWSCDN
+      name: VSCByu81
+      server: *bug-Byu81
+    - <<: *VmessWSCDN
+      name: VSCByu82
+      server: *bug-Byu82
+    - <<: *VmessWSCDN
+      name: VSCByu83
+      server: *bug-Byu83
+    - <<: *VmessWSCDN
+      name: VSCXL1
+      server: *bug-XL1
+    - <<: *VmessWSCDN
+      name: VSCXL2
+      server: *bug-XL2
+    - <<: *VmessWSCDN
+      name: VSCXL3
+      server: *bug-XL3
+    - <<: *VmessWSCDN
+      name: VSCXL4
+      server: *bug-XL4
+    - <<: *VmessWSCDN
+      name: VSCXL5
+      server: *bug-XL5
+    - <<: *VmessWSCDN
+      name: VSCXL6
+      server: *bug-XL6
+    - <<: *VmessWSCDN
+      name: VSCXL7
+      server: *bug-XL7
+    - <<: *VmessWSCDN
+      name: VSCXL8
+      server: *bug-XL8
+    - <<: *VmessWSCDN
+      name: VSCXL9
+      server: *bug-XL9
+    - <<: *VmessWSCDN
+      name: VSCXL10
+      server: *bug-XL10
+    - <<: *VmessWSCDN
+      name: VSCXL11
+      server: *bug-XL11
+    - <<: *VmessWSCDN
+      name: VSCXL12
+      server: *bug-XL12
+    - <<: *VmessWSCDN
+      name: VSCXL13
+      server: *bug-XL13
+    - <<: *VmessWSCDN
+      name: VSCXL14
+      server: *bug-XL14
+    - <<: *VmessWSCDN
+      name: VSCXL15
+      server: *bug-XL15
+    - <<: *VmessWSCDN
+      name: VSCXL16
+      server: *bug-XL16
+    - <<: *VmessWSCDN
+      name: VSCXL17
+      server: *bug-XL17
+    - <<: *VmessWSCDN
+      name: VSCXL18
+      server: *bug-XL18
+    - <<: *VmessWSCDN
+      name: VSCXL19
+      server: *bug-XL19
+    - <<: *VmessWSCDN
+      name: VSCXL20
+      server: *bug-XL20
+    - <<: *VmessWSCDN
+      name: VSCXL21
+      server: *bug-XL21
+    - <<: *VmessWSCDN
+      name: VSCXL22
+      server: *bug-XL22
+    - <<: *VmessWSCDN
+      name: VSCXL23
+      server: *bug-XL23
+    - <<: *VmessWSCDN
+      name: VSCXL24
+      server: *bug-XL24
+    - <<: *VmessWSCDN
+      name: VSCXL25
+      server: *bug-XL25
+    - <<: *VmessWSCDN
+      name: VSCXL26
+      server: *bug-XL26
+    - <<: *VmessWSCDN
+      name: VSCXL27
+      server: *bug-XL27
+    - <<: *VmessWSCDN
+      name: VSCXL28
+      server: *bug-XL28
+    - <<: *VmessWSCDN
+      name: VSCXL29
+      server: *bug-XL29
+    - <<: *VmessWSCDN
+      name: VSCXL30
+      server: *bug-XL30
+    - <<: *VmessWSCDN
+      name: VSCXL31
+      server: *bug-XL31
+    - <<: *VmessWSCDN
+      name: VSCXL32
+      server: *bug-XL32
+    - <<: *VmessWSCDN
+      name: VSCXL33
+      server: *bug-XL33
+    - <<: *VmessWSCDN
+      name: VSCXL34
+      server: *bug-XL34
+    - <<: *VmessWSCDN
+      name: VSCXL35
+      server: *bug-XL35
+    - <<: *VmessWSCDN
+      name: VSCXL36
+      server: *bug-XL36
+    - <<: *VmessWSCDN
+      name: VSCXL37
+      server: *bug-XL37
+    - <<: *VmessWSCDN
+      name: VSCXL38
+      server: *bug-XL38
+    - <<: *VmessWSCDN
+      name: VSCXL39
+      server: *bug-XL39
+    - <<: *VmessWSCDN
+      name: VSCXL40
+      server: *bug-XL40
+    - <<: *VmessWSCDN
+      name: VSCXL41
+      server: *bug-XL41
+    - <<: *VmessWSCDN
+      name: VSCXL42
+      server: *bug-XL42
+    - <<: *VmessWSCDN
+      name: VSCXL43
+      server: *bug-XL43
+    - <<: *VmessWSCDN
+      name: VSCXL44
+      server: *bug-XL44
+    - <<: *VmessWSCDN
+      name: VSCXL45
+      server: *bug-XL45
+    - <<: *VmessWSCDN
+      name: VSCXL46
+      server: *bug-XL46
+    - <<: *VmessWSCDN
+      name: VSCXL47
+      server: *bug-XL47
+    - <<: *VmessWSCDN
+      name: VSCXL48
+      server: *bug-XL48
+    - <<: *VmessWSCDN
+      name: VSCXL49
+      server: *bug-XL49
+    - <<: *VmessWSCDN
+      name: VSCXL50
+      server: *bug-XL50
+    - <<: *VmessWSCDN
+      name: VSCXL51
+      server: *bug-XL51
+    - <<: *VmessWSCDN
+      name: VSCXL52
+      server: *bug-XL52
+    - <<: *VmessWSCDN
+      name: VSCXL53
+      server: *bug-XL53
+    - <<: *VmessWSCDN
+      name: VSCXL54
+      server: *bug-XL54
+    - <<: *VmessWSCDN
+      name: VSCXL55
+      server: *bug-XL55
+    - <<: *VmessWSCDN
+      name: VSCXL56
+      server: *bug-XL56
+    - <<: *VmessWSCDN
+      name: VSCXL57
+      server: *bug-XL57
+    - <<: *VmessWSCDN
+      name: VSCXL58
+      server: *bug-XL58
+    - <<: *VmessWSCDN
+      name: VSCXL59
+      server: *bug-XL59
+    - <<: *VmessWSCDN
+      name: VSCXL60
+      server: *bug-XL60
+    - <<: *VmessWSCDN
+      name: VSCXL61
+      server: *bug-XL61
+    - <<: *VmessWSCDN
+      name: VSCXL62
+      server: *bug-XL62
+    - <<: *VmessWSCDN
+      name: VSCXL63
+      server: *bug-XL63
+    - <<: *VmessWSCDN
+      name: VSCXL64
+      server: *bug-XL64
+    - <<: *VmessWSCDN
+      name: VSCXL65
+      server: *bug-XL65
+    - <<: *VmessWSCDN
+      name: VSCXL66
+      server: *bug-XL66
+    - <<: *VmessWSCDN
+      name: VSCXL67
+      server: *bug-XL67
+    - <<: *VmessWSCDN
+      name: VSCXL68
+      server: *bug-XL68
+    - <<: *VmessWSCDN
+      name: VSCXL69
+      server: *bug-XL69
+    - <<: *VmessWSCDN
+      name: VSCXL70
+      server: *bug-XL70
+    - <<: *VmessWSCDN
+      name: VSCXL71
+      server: *bug-XL71
+    - <<: *VmessWSCDN
+      name: VSCXL72
+      server: *bug-XL72
+    - <<: *VmessWSCDN
+      name: VSCXL73
+      server: *bug-XL73
+    - <<: *VmessWSCDN
+      name: VSCXL74
+      server: *bug-XL74
+    - <<: *VmessWSCDN
+      name: VSCXL75
+      server: *bug-XL75
+    - <<: *VmessWSCDN
+      name: VSCXL76
+      server: *bug-XL76
+    - <<: *VmessWSCDN
+      name: VSCXL77
+      server: *bug-XL77
+    - <<: *VmessWSCDN
+      name: VSCXL78
+      server: *bug-XL78
+    - <<: *VmessWSCDN
+      name: VSCXL79
+      server: *bug-XL79
+    - <<: *VmessWSCDN
+      name: VSCXL80
+      server: *bug-XL80
+    - <<: *VmessWSCDN
+      name: VSCXL81
+      server: *bug-XL81
+    - <<: *VmessWSCDN
+      name: VSCXL82
+      server: *bug-XL82
+    - <<: *VmessWSCDN
+      name: VSCXL83
+      server: *bug-XL83
+    - <<: *VmessWSCDN
+      name: VSCXL84
+      server: *bug-XL84
+    - <<: *VmessWSCDN
+      name: VSCXL85
+      server: *bug-XL85
+    - <<: *VmessWSCDN
+      name: VSCXL86
+      server: *bug-XL86
+    - <<: *VmessWSCDN
+      name: VSCXL87
+      server: *bug-XL87
+    - <<: *VmessWSCDN
+      name: VSCXL88
+      server: *bug-XL88
+    - <<: *VmessWSCDN
+      name: VSCXL89
+      server: *bug-XL89
+    - <<: *VmessWSCDN
+      name: VSCXL90
+      server: *bug-XL90
+    - <<: *VmessWSCDN
+      name: VSCXL91
+      server: *bug-XL91
+    - <<: *VmessWSCDN
+      name: VSCXL92
+      server: *bug-XL92
+    - <<: *VmessWSCDN
+      name: VSCXL93
+      server: *bug-XL93
+    - <<: *VmessWSCDN
+      name: VSCXL94
+      server: *bug-XL94
+    - <<: *VmessWSCDN
+      name: VSCXL95
+      server: *bug-XL95
+    - <<: *VmessWSCDN
+      name: VSCXL96
+      server: *bug-XL96
+    - <<: *VmessWSCDN
+      name: VSCXL97
+      server: *bug-XL97
+    - <<: *VmessWSCDN
+      name: VSCXL98
+      server: *bug-XL98
+    - <<: *VmessWSCDN
+      name: VSCIsat1
+      server: *bug-Isat1
+    - <<: *VmessWSCDN
+      name: VSCIsat2
+      server: *bug-Isat2
+    - <<: *VmessWSCDN
+      name: VSCIsat3
+      server: *bug-Isat3
+    - <<: *VmessWSCDN
+      name: VSCIsat4
+      server: *bug-Isat4
+    - <<: *VmessWSCDN
+      name: VSCIsat5
+      server: *bug-Isat5
+    - <<: *VmessWSCDN
+      name: VSCIsat6
+      server: *bug-Isat6
+    - <<: *VmessWSCDN
+      name: VSCIsat7
+      server: *bug-Isat7
+    - <<: *VmessWSCDN
+      name: VSCIsat8
+      server: *bug-Isat8
+    - <<: *VmessWSCDN
+      name: VSCIsat9
+      server: *bug-Isat9
+    - <<: *VmessWSCDN
+      name: VSCIsat10
+      server: *bug-Isat10
+    - <<: *VmessWSCDN
+      name: VSCIsat11
+      server: *bug-Isat11
+    - <<: *VmessWSCDN
+      name: VSCIsat12
+      server: *bug-Isat12
+    - <<: *VmessWSCDN
+      name: VSCIsat13
+      server: *bug-Isat13
+    - <<: *VmessWSCDN
+      name: VSCIsat14
+      server: *bug-Isat14
+    - <<: *VmessWSCDN
+      name: VSCIsat15
+      server: *bug-Isat15
+    - <<: *VmessWSCDN
+      name: VSCIsat16
+      server: *bug-Isat16
+    - <<: *VmessWSCDN
+      name: VSCIsat17
+      server: *bug-Isat17
+    - <<: *VmessWSCDN
+      name: VSCIsat18
+      server: *bug-Isat18
+    - <<: *VmessWSCDN
+      name: VSCIsat19
+      server: *bug-Isat19
+    - <<: *VmessWSCDN
+      name: VSCIsat20
+      server: *bug-Isat20
+    - <<: *VmessWSCDN
+      name: VSCIsat21
+      server: *bug-Isat21
+    - <<: *VmessWSCDN
+      name: VSCIsat22
+      server: *bug-Isat22
+    - <<: *VmessWSCDN
+      name: VSCIsat23
+      server: *bug-Isat23
+    - <<: *VmessWSCDN
+      name: VSCIsat24
+      server: *bug-Isat24
+    - <<: *VmessWSCDN
+      name: VSCIsat25
+      server: *bug-Isat25
+    - <<: *VmessWSCDN
+      name: VSCIsat26
+      server: *bug-Isat26
+    - <<: *VmessWSCDN
+      name: VSCIsat27
+      server: *bug-Isat27
+    - <<: *VmessWSCDN
+      name: VSCIsat28
+      server: *bug-Isat28
+    - <<: *VmessWSCDN
+      name: VSCIsat29
+      server: *bug-Isat29
+    - <<: *VmessWSCDN
+      name: VSCIsat30
+      server: *bug-Isat30
+    - <<: *VmessWSCDN
+      name: VSCIsat31
+      server: *bug-Isat31
+    - <<: *VmessWSCDN
+      name: VSCIsat32
+      server: *bug-Isat32
+    - <<: *VmessWSCDN
+      name: VSCIsat33
+      server: *bug-Isat33
+    - <<: *VmessWSCDN
+      name: VSCIsat34
+      server: *bug-Isat34
+    - <<: *VmessWSCDN
+      name: VSCIsat35
+      server: *bug-Isat35
+    - <<: *VmessWSCDN
+      name: VSCIsat36
+      server: *bug-Isat36
+    - <<: *VmessWSCDN
+      name: VSCIsat37
+      server: *bug-Isat37
+    - <<: *VmessWSCDN
+      name: VSCIsat38
+      server: *bug-Isat38
+    - <<: *VmessWSCDN
+      name: VSCIsat39
+      server: *bug-Isat39
+    - <<: *VmessWSCDN
+      name: VSCIsat40
+      server: *bug-Isat40
+    - <<: *VmessWSCDN
+      name: VSCIsat41
+      server: *bug-Isat41
+    - <<: *VmessWSCDN
+      name: VSCIsat42
+      server: *bug-Isat42
+    - <<: *VmessWSCDN
+      name: VSCIsat43
+      server: *bug-Isat43
+    - <<: *VmessWSCDN
+      name: VSCIsat44
+      server: *bug-Isat44
+    - <<: *VmessWSCDN
+      name: VSCIsat45
+      server: *bug-Isat45
+    - <<: *VmessWSCDN
+      name: VSCIsat46
+      server: *bug-Isat46
+    - <<: *VmessWSCDN
+      name: VSCIsat47
+      server: *bug-Isat47
+    - <<: *VmessWSCDN
+      name: VSCIsat48
+      server: *bug-Isat48
+    - <<: *VmessWSCDN
+      name: VSCIsat49
+      server: *bug-Isat49
+    - <<: *VmessWSCDN
+      name: VSCIsat50
+      server: *bug-Isat50
+    - <<: *VmessWSCDN
+      name: VSCIsat51
+      server: *bug-Isat51
+    - <<: *VmessWSCDN
+      name: VSCIsat52
+      server: *bug-Isat52
+    - <<: *VmessWSCDN
+      name: VSCIsat53
+      server: *bug-Isat53
+    - <<: *VmessWSCDN
+      name: VSCIsat54
+      server: *bug-Isat54
+    - <<: *VmessWSCDN
+      name: VSCIsat55
+      server: *bug-Isat55
+    - <<: *VmessWSCDN
+      name: VSCIsat56
+      server: *bug-Isat56
+    - <<: *VmessWSCDN
+      name: VSCIsat57
+      server: *bug-Isat57
+    - <<: *VmessWSCDN
+      name: VSCIsat58
+      server: *bug-Isat58
+    - <<: *VmessWSCDN
+      name: VSCIsat59
+      server: *bug-Isat59
+    - <<: *VmessWSCDN
+      name: VSCIsat60
+      server: *bug-Isat60
+    - <<: *VmessWSCDN
+      name: VSCIsat61
+      server: *bug-Isat61
+    - <<: *VmessWSCDN
+      name: VSCIsat62
+      server: *bug-Isat62
+    - <<: *VmessWSCDN
+      name: VSCIsat63
+      server: *bug-Isat63
+    - <<: *VmessWSCDN
+      name: VSCIsat64
+      server: *bug-Isat64
+    - <<: *VmessWSCDN
+      name: VSCIsat65
+      server: *bug-Isat65
+    - <<: *VmessWSCDN
+      name: VSCIsat66
+      server: *bug-Isat66
+    - <<: *VmessWSCDN
+      name: VSCIsat67
+      server: *bug-Isat67
+    - <<: *VmessWSCDN
+      name: VSCIsat68
+      server: *bug-Isat68
+    - <<: *VmessWSCDN
+      name: VSCIsat69
+      server: *bug-Isat69
+    - <<: *VmessWSCDN
+      name: VSCIsat70
+      server: *bug-Isat70
+    - <<: *VmessWSCDN
+      name: VSCIsat71
+      server: *bug-Isat71
+    - <<: *VmessWSCDN
+      name: VSCIsat72
+      server: *bug-Isat72
+    - <<: *VmessWSCDN
+      name: VSCIsat73
+      server: *bug-Isat73
+    - <<: *VmessWSCDN
+      name: VSCIsat74
+      server: *bug-Isat74
+    - <<: *VmessWSCDN
+      name: VSCIsat75
+      server: *bug-Isat75
+    - <<: *VmessWSCDN
+      name: VSCIsat76
+      server: *bug-Isat76
+    - <<: *VmessWSCDN
+      name: VSCSmar1
+      server: *bug-Smar1
+    - <<: *VmessWSCDN
+      name: VSCSmar2
+      server: *bug-Smar2
+    - <<: *VmessWSCDN
+      name: VSCSmar3
+      server: *bug-Smar3
+    - <<: *VmessWSCDN
+      name: VSCSmar4
+      server: *bug-Smar4
+    - <<: *VmessWSCDN
+      name: VSCSmar5
+      server: *bug-Smar5
+    - <<: *VmessWSCDN
+      name: VSCSmar6
+      server: *bug-Smar6
+    - <<: *VmessWSCDN
+      name: VSCSmar7
+      server: *bug-Smar7
+    - <<: *VmessWSCDN
+      name: VSCSmar8
+      server: *bug-Smar8
+    - <<: *VmessWSCDN
+      name: VSCSmar9
+      server: *bug-Smar9
+    - <<: *VmessWSCDN
+      name: VSCSmar10
+      server: *bug-Smar10
+    - <<: *VmessWSCDN
+      name: VSCSmar11
+      server: *bug-Smar11
+    - <<: *VmessWSCDN
+      name: VSCSmar12
+      server: *bug-Smar12
+    - <<: *VmessWSCDN
+      name: VSCSmar13
+      server: *bug-Smar13
+    - <<: *VmessWSCDN
+      name: VSCSmar14
+      server: *bug-Smar14
+    - <<: *VmessWSCDN
+      name: VSCSmar15
+      server: *bug-Smar15
+    - <<: *VmessWSCDN
+      name: VSCSmar16
+      server: *bug-Smar16
+    - <<: *VmessWSCDN
+      name: VSCSmar17
+      server: *bug-Smar17
+    - <<: *VmessWSCDN
+      name: VSCSmar18
+      server: *bug-Smar18
+
+#VmessWSCDN80
+    - &VmessWSCDN80
+      <<: *basevmess
+      name: VSC80Tsel1
+      server: *bug-Tsel1 
+      port: 80
+      uuid: c6747da4-fb2e-4a2a-bdb7-8614bdd6b0b3
+      servername: sg2-v2ray.sshkit.org
+      strategy: consistent-hashing
+      url: https://dns.alidns.com/dns-query
+      interval: 300
+      ws-opts:
+        path: /sshkit/439427127/642f26c604981/
+        headers:
+          Host: sg2-v2ray.sshkit.org
+          X-Online-Host: tor.cloudflare-dns.com
+          X-Forward-Host: tor.cloudflare-dns.com
+          Early-Data: 1
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel2
+      server: *bug-Tsel2
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel3
+      server: *bug-Tsel3
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel4
+      server: *bug-Tsel4
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel5
+      server: *bug-Tsel5
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel6
+      server: *bug-Tsel6
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel7
+      server: *bug-Tsel7
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel8
+      server: *bug-Tsel8
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel9
+      server: *bug-Tsel9
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel10
+      server: *bug-Tsel10
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel11
+      server: *bug-Tsel11
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel12
+      server: *bug-Tsel12
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel13
+      server: *bug-Tsel13
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel14
+      server: *bug-Tsel14
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel15
+      server: *bug-Tsel15
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel16
+      server: *bug-Tsel16
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel17
+      server: *bug-Tsel17
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel18
+      server: *bug-Tsel18
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel19
+      server: *bug-Tsel19
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel20
+      server: *bug-Tsel20
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel21
+      server: *bug-Tsel21
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel22
+      server: *bug-Tsel22
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel23
+      server: *bug-Tsel23
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel24
+      server: *bug-Tsel24
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel25
+      server: *bug-Tsel25
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel26
+      server: *bug-Tsel26
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel27
+      server: *bug-Tsel27
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel28
+      server: *bug-Tsel28
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel29
+      server: *bug-Tsel29
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel30
+      server: *bug-Tsel30
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel31
+      server: *bug-Tsel31
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel32
+      server: *bug-Tsel32
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel33
+      server: *bug-Tsel33
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel34
+      server: *bug-Tsel34
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel35
+      server: *bug-Tsel35
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel36
+      server: *bug-Tsel36
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel37
+      server: *bug-Tsel37
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel38
+      server: *bug-Tsel38
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel39
+      server: *bug-Tsel39
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel40
+      server: *bug-Tsel40
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel41
+      server: *bug-Tsel41
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel42
+      server: *bug-Tsel42
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel43
+      server: *bug-Tsel43
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel44
+      server: *bug-Tsel44
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel45
+      server: *bug-Tsel45
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel46
+      server: *bug-Tsel46
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel47
+      server: *bug-Tsel47
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel48
+      server: *bug-Tsel48
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel49
+      server: *bug-Tsel49
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel50
+      server: *bug-Tsel50
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel51
+      server: *bug-Tsel51
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel52
+      server: *bug-Tsel52
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel53
+      server: *bug-Tsel53
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel54
+      server: *bug-Tsel54
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel55
+      server: *bug-Tsel55
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel56
+      server: *bug-Tsel56
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel57
+      server: *bug-Tsel57
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel58
+      server: *bug-Tsel58
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel59
+      server: *bug-Tsel59
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel60
+      server: *bug-Tsel60
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel61
+      server: *bug-Tsel61
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel62
+      server: *bug-Tsel62
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel63
+      server: *bug-Tsel63
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel64
+      server: *bug-Tsel64
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel65
+      server: *bug-Tsel65
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel66
+      server: *bug-Tsel66
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel67
+      server: *bug-Tsel67
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel68
+      server: *bug-Tsel68
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel69
+      server: *bug-Tsel69
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel70
+      server: *bug-Tsel70
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel71
+      server: *bug-Tsel71
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel72
+      server: *bug-Tsel72
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel73
+      server: *bug-Tsel73
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel74
+      server: *bug-Tsel74
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel75
+      server: *bug-Tsel75
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel76
+      server: *bug-Tsel76
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel77
+      server: *bug-Tsel77
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel78
+      server: *bug-Tsel78
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel79
+      server: *bug-Tsel79
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel80
+      server: *bug-Tsel80
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel81
+      server: *bug-Tsel81
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel82
+      server: *bug-Tsel82
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel83
+      server: *bug-Tsel83
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel84
+      server: *bug-Tsel84
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel85
+      server: *bug-Tsel85
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel86
+      server: *bug-Tsel86
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel87
+      server: *bug-Tsel87
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel88
+      server: *bug-Tsel88
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel89
+      server: *bug-Tsel89
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel90
+      server: *bug-Tsel90
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel91
+      server: *bug-Tsel91
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel92
+      server: *bug-Tsel92
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel93
+      server: *bug-Tsel93
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel94
+      server: *bug-Tsel94
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel95
+      server: *bug-Tsel95
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel96
+      server: *bug-Tsel96
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel97
+      server: *bug-Tsel97
+    - <<: *VmessWSCDN80
+      name: VSC80Tsel98
+      server: *bug-Tsel98
+    - <<: *VmessWSCDN80
+      name: VSC80Byu1
+      server: *bug-Byu1
+    - <<: *VmessWSCDN80
+      name: VSC80Byu2
+      server: *bug-Byu2
+    - <<: *VmessWSCDN80
+      name: VSC80Byu3
+      server: *bug-Byu3
+    - <<: *VmessWSCDN80
+      name: VSC80Byu4
+      server: *bug-Byu4
+    - <<: *VmessWSCDN80
+      name: VSC80Byu5
+      server: *bug-Byu5
+    - <<: *VmessWSCDN80
+      name: VSC80Byu6
+      server: *bug-Byu6
+    - <<: *VmessWSCDN80
+      name: VSC80Byu7
+      server: *bug-Byu7
+    - <<: *VmessWSCDN80
+      name: VSC80Byu8
+      server: *bug-Byu8
+    - <<: *VmessWSCDN80
+      name: VSC80Byu9
+      server: *bug-Byu9
+    - <<: *VmessWSCDN80
+      name: VSC80Byu10
+      server: *bug-Byu10
+    - <<: *VmessWSCDN80
+      name: VSC80Byu11
+      server: *bug-Byu11
+    - <<: *VmessWSCDN80
+      name: VSC80Byu12
+      server: *bug-Byu12
+    - <<: *VmessWSCDN80
+      name: VSC80Byu13
+      server: *bug-Byu13
+    - <<: *VmessWSCDN80
+      name: VSC80Byu14
+      server: *bug-Byu14
+    - <<: *VmessWSCDN80
+      name: VSC80Byu15
+      server: *bug-Byu15
+    - <<: *VmessWSCDN80
+      name: VSC80Byu16
+      server: *bug-Byu16
+    - <<: *VmessWSCDN80
+      name: VSC80Byu17
+      server: *bug-Byu17
+    - <<: *VmessWSCDN80
+      name: VSC80Byu18
+      server: *bug-Byu18
+    - <<: *VmessWSCDN80
+      name: VSC80Byu19
+      server: *bug-Byu19
+    - <<: *VmessWSCDN80
+      name: VSC80Byu20
+      server: *bug-Byu20
+    - <<: *VmessWSCDN80
+      name: VSC80Byu21
+      server: *bug-Byu21
+    - <<: *VmessWSCDN80
+      name: VSC80Byu22
+      server: *bug-Byu22
+    - <<: *VmessWSCDN80
+      name: VSC80Byu23
+      server: *bug-Byu23
+    - <<: *VmessWSCDN80
+      name: VSC80Byu24
+      server: *bug-Byu24
+    - <<: *VmessWSCDN80
+      name: VSC80Byu25
+      server: *bug-Byu25
+    - <<: *VmessWSCDN80
+      name: VSC80Byu26
+      server: *bug-Byu26
+    - <<: *VmessWSCDN80
+      name: VSC80Byu27
+      server: *bug-Byu27
+    - <<: *VmessWSCDN80
+      name: VSC80Byu28
+      server: *bug-Byu28
+    - <<: *VmessWSCDN80
+      name: VSC80Byu29
+      server: *bug-Byu29
+    - <<: *VmessWSCDN80
+      name: VSC80Byu30
+      server: *bug-Byu30
+    - <<: *VmessWSCDN80
+      name: VSC80Byu31
+      server: *bug-Byu31
+    - <<: *VmessWSCDN80
+      name: VSC80Byu32
+      server: *bug-Byu32
+    - <<: *VmessWSCDN80
+      name: VSC80Byu33
+      server: *bug-Byu33
+    - <<: *VmessWSCDN80
+      name: VSC80Byu34
+      server: *bug-Byu34
+    - <<: *VmessWSCDN80
+      name: VSC80Byu35
+      server: *bug-Byu35
+    - <<: *VmessWSCDN80
+      name: VSC80Byu36
+      server: *bug-Byu36
+    - <<: *VmessWSCDN80
+      name: VSC80Byu37
+      server: *bug-Byu37
+    - <<: *VmessWSCDN80
+      name: VSC80Byu38
+      server: *bug-Byu38
+    - <<: *VmessWSCDN80
+      name: VSC80Byu39
+      server: *bug-Byu39
+    - <<: *VmessWSCDN80
+      name: VSC80Byu40
+      server: *bug-Byu40
+    - <<: *VmessWSCDN80
+      name: VSC80Byu41
+      server: *bug-Byu41
+    - <<: *VmessWSCDN80
+      name: VSC80Byu42
+      server: *bug-Byu42
+    - <<: *VmessWSCDN80
+      name: VSC80Byu43
+      server: *bug-Byu43
+    - <<: *VmessWSCDN80
+      name: VSC80Byu44
+      server: *bug-Byu44
+    - <<: *VmessWSCDN80
+      name: VSC80Byu45
+      server: *bug-Byu45
+    - <<: *VmessWSCDN80
+      name: VSC80Byu46
+      server: *bug-Byu46
+    - <<: *VmessWSCDN80
+      name: VSC80Byu47
+      server: *bug-Byu47
+    - <<: *VmessWSCDN80
+      name: VSC80Byu48
+      server: *bug-Byu48
+    - <<: *VmessWSCDN80
+      name: VSC80Byu49
+      server: *bug-Byu49
+    - <<: *VmessWSCDN80
+      name: VSC80Byu50
+      server: *bug-Byu50
+    - <<: *VmessWSCDN80
+      name: VSC80Byu51
+      server: *bug-Byu51
+    - <<: *VmessWSCDN80
+      name: VSC80Byu52
+      server: *bug-Byu52
+    - <<: *VmessWSCDN80
+      name: VSC80Byu53
+      server: *bug-Byu53
+    - <<: *VmessWSCDN80
+      name: VSC80Byu54
+      server: *bug-Byu54
+    - <<: *VmessWSCDN80
+      name: VSC80Byu55
+      server: *bug-Byu55
+    - <<: *VmessWSCDN80
+      name: VSC80Byu56
+      server: *bug-Byu56
+    - <<: *VmessWSCDN80
+      name: VSC80Byu57
+      server: *bug-Byu57
+    - <<: *VmessWSCDN80
+      name: VSC80Byu58
+      server: *bug-Byu58
+    - <<: *VmessWSCDN80
+      name: VSC80Byu59
+      server: *bug-Byu59
+    - <<: *VmessWSCDN80
+      name: VSC80Byu60
+      server: *bug-Byu60
+    - <<: *VmessWSCDN80
+      name: VSC80Byu61
+      server: *bug-Byu61
+    - <<: *VmessWSCDN80
+      name: VSC80Byu62
+      server: *bug-Byu62
+    - <<: *VmessWSCDN80
+      name: VSC80Byu63
+      server: *bug-Byu63
+    - <<: *VmessWSCDN80
+      name: VSC80Byu64
+      server: *bug-Byu64
+    - <<: *VmessWSCDN80
+      name: VSC80Byu65
+      server: *bug-Byu65
+    - <<: *VmessWSCDN80
+      name: VSC80Byu66
+      server: *bug-Byu66
+    - <<: *VmessWSCDN80
+      name: VSC80Byu67
+      server: *bug-Byu67
+    - <<: *VmessWSCDN80
+      name: VSC80Byu68
+      server: *bug-Byu68
+    - <<: *VmessWSCDN80
+      name: VSC80Byu69
+      server: *bug-Byu69
+    - <<: *VmessWSCDN80
+      name: VSC80Byu70
+      server: *bug-Byu70
+    - <<: *VmessWSCDN80
+      name: VSC80Byu71
+      server: *bug-Byu71
+    - <<: *VmessWSCDN80
+      name: VSC80Byu72
+      server: *bug-Byu72
+    - <<: *VmessWSCDN80
+      name: VSC80Byu73
+      server: *bug-Byu73
+    - <<: *VmessWSCDN80
+      name: VSC80Byu74
+      server: *bug-Byu74
+    - <<: *VmessWSCDN80
+      name: VSC80Byu75
+      server: *bug-Byu75
+    - <<: *VmessWSCDN80
+      name: VSC80Byu76
+      server: *bug-Byu76
+    - <<: *VmessWSCDN80
+      name: VSC80Byu77
+      server: *bug-Byu77
+    - <<: *VmessWSCDN80
+      name: VSC80Byu78
+      server: *bug-Byu78
+    - <<: *VmessWSCDN80
+      name: VSC80Byu79
+      server: *bug-Byu79
+    - <<: *VmessWSCDN80
+      name: VSC80Byu80
+      server: *bug-Byu80
+    - <<: *VmessWSCDN80
+      name: VSC80Byu81
+      server: *bug-Byu81
+    - <<: *VmessWSCDN80
+      name: VSC80Byu82
+      server: *bug-Byu82
+    - <<: *VmessWSCDN80
+      name: VSC80Byu83
+      server: *bug-Byu83
+    - <<: *VmessWSCDN80
+      name: VSC80XL1
+      server: *bug-XL1
+    - <<: *VmessWSCDN80
+      name: VSC80XL2
+      server: *bug-XL2
+    - <<: *VmessWSCDN80
+      name: VSC80XL3
+      server: *bug-XL3
+    - <<: *VmessWSCDN80
+      name: VSC80XL4
+      server: *bug-XL4
+    - <<: *VmessWSCDN80
+      name: VSC80XL5
+      server: *bug-XL5
+    - <<: *VmessWSCDN80
+      name: VSC80XL6
+      server: *bug-XL6
+    - <<: *VmessWSCDN80
+      name: VSC80XL7
+      server: *bug-XL7
+    - <<: *VmessWSCDN80
+      name: VSC80XL8
+      server: *bug-XL8
+    - <<: *VmessWSCDN80
+      name: VSC80XL9
+      server: *bug-XL9
+    - <<: *VmessWSCDN80
+      name: VSC80XL10
+      server: *bug-XL10
+    - <<: *VmessWSCDN80
+      name: VSC80XL11
+      server: *bug-XL11
+    - <<: *VmessWSCDN80
+      name: VSC80XL12
+      server: *bug-XL12
+    - <<: *VmessWSCDN80
+      name: VSC80XL13
+      server: *bug-XL13
+    - <<: *VmessWSCDN80
+      name: VSC80XL14
+      server: *bug-XL14
+    - <<: *VmessWSCDN80
+      name: VSC80XL15
+      server: *bug-XL15
+    - <<: *VmessWSCDN80
+      name: VSC80XL16
+      server: *bug-XL16
+    - <<: *VmessWSCDN80
+      name: VSC80XL17
+      server: *bug-XL17
+    - <<: *VmessWSCDN80
+      name: VSC80XL18
+      server: *bug-XL18
+    - <<: *VmessWSCDN80
+      name: VSC80XL19
+      server: *bug-XL19
+    - <<: *VmessWSCDN80
+      name: VSC80XL20
+      server: *bug-XL20
+    - <<: *VmessWSCDN80
+      name: VSC80XL21
+      server: *bug-XL21
+    - <<: *VmessWSCDN80
+      name: VSC80XL22
+      server: *bug-XL22
+    - <<: *VmessWSCDN80
+      name: VSC80XL23
+      server: *bug-XL23
+    - <<: *VmessWSCDN80
+      name: VSC80XL24
+      server: *bug-XL24
+    - <<: *VmessWSCDN80
+      name: VSC80XL25
+      server: *bug-XL25
+    - <<: *VmessWSCDN80
+      name: VSC80XL26
+      server: *bug-XL26
+    - <<: *VmessWSCDN80
+      name: VSC80XL27
+      server: *bug-XL27
+    - <<: *VmessWSCDN80
+      name: VSC80XL28
+      server: *bug-XL28
+    - <<: *VmessWSCDN80
+      name: VSC80XL29
+      server: *bug-XL29
+    - <<: *VmessWSCDN80
+      name: VSC80XL30
+      server: *bug-XL30
+    - <<: *VmessWSCDN80
+      name: VSC80XL31
+      server: *bug-XL31
+    - <<: *VmessWSCDN80
+      name: VSC80XL32
+      server: *bug-XL32
+    - <<: *VmessWSCDN80
+      name: VSC80XL33
+      server: *bug-XL33
+    - <<: *VmessWSCDN80
+      name: VSC80XL34
+      server: *bug-XL34
+    - <<: *VmessWSCDN80
+      name: VSC80XL35
+      server: *bug-XL35
+    - <<: *VmessWSCDN80
+      name: VSC80XL36
+      server: *bug-XL36
+    - <<: *VmessWSCDN80
+      name: VSC80XL37
+      server: *bug-XL37
+    - <<: *VmessWSCDN80
+      name: VSC80XL38
+      server: *bug-XL38
+    - <<: *VmessWSCDN80
+      name: VSC80XL39
+      server: *bug-XL39
+    - <<: *VmessWSCDN80
+      name: VSC80XL40
+      server: *bug-XL40
+    - <<: *VmessWSCDN80
+      name: VSC80XL41
+      server: *bug-XL41
+    - <<: *VmessWSCDN80
+      name: VSC80XL42
+      server: *bug-XL42
+    - <<: *VmessWSCDN80
+      name: VSC80XL43
+      server: *bug-XL43
+    - <<: *VmessWSCDN80
+      name: VSC80XL44
+      server: *bug-XL44
+    - <<: *VmessWSCDN80
+      name: VSC80XL45
+      server: *bug-XL45
+    - <<: *VmessWSCDN80
+      name: VSC80XL46
+      server: *bug-XL46
+    - <<: *VmessWSCDN80
+      name: VSC80XL47
+      server: *bug-XL47
+    - <<: *VmessWSCDN80
+      name: VSC80XL48
+      server: *bug-XL48
+    - <<: *VmessWSCDN80
+      name: VSC80XL49
+      server: *bug-XL49
+    - <<: *VmessWSCDN80
+      name: VSC80XL50
+      server: *bug-XL50
+    - <<: *VmessWSCDN80
+      name: VSC80XL51
+      server: *bug-XL51
+    - <<: *VmessWSCDN80
+      name: VSC80XL52
+      server: *bug-XL52
+    - <<: *VmessWSCDN80
+      name: VSC80XL53
+      server: *bug-XL53
+    - <<: *VmessWSCDN80
+      name: VSC80XL54
+      server: *bug-XL54
+    - <<: *VmessWSCDN80
+      name: VSC80XL55
+      server: *bug-XL55
+    - <<: *VmessWSCDN80
+      name: VSC80XL56
+      server: *bug-XL56
+    - <<: *VmessWSCDN80
+      name: VSC80XL57
+      server: *bug-XL57
+    - <<: *VmessWSCDN80
+      name: VSC80XL58
+      server: *bug-XL58
+    - <<: *VmessWSCDN80
+      name: VSC80XL59
+      server: *bug-XL59
+    - <<: *VmessWSCDN80
+      name: VSC80XL60
+      server: *bug-XL60
+    - <<: *VmessWSCDN80
+      name: VSC80XL61
+      server: *bug-XL61
+    - <<: *VmessWSCDN80
+      name: VSC80XL62
+      server: *bug-XL62
+    - <<: *VmessWSCDN80
+      name: VSC80XL63
+      server: *bug-XL63
+    - <<: *VmessWSCDN80
+      name: VSC80XL64
+      server: *bug-XL64
+    - <<: *VmessWSCDN80
+      name: VSC80XL65
+      server: *bug-XL65
+    - <<: *VmessWSCDN80
+      name: VSC80XL66
+      server: *bug-XL66
+    - <<: *VmessWSCDN80
+      name: VSC80XL67
+      server: *bug-XL67
+    - <<: *VmessWSCDN80
+      name: VSC80XL68
+      server: *bug-XL68
+    - <<: *VmessWSCDN80
+      name: VSC80XL69
+      server: *bug-XL69
+    - <<: *VmessWSCDN80
+      name: VSC80XL70
+      server: *bug-XL70
+    - <<: *VmessWSCDN80
+      name: VSC80XL71
+      server: *bug-XL71
+    - <<: *VmessWSCDN80
+      name: VSC80XL72
+      server: *bug-XL72
+    - <<: *VmessWSCDN80
+      name: VSC80XL73
+      server: *bug-XL73
+    - <<: *VmessWSCDN80
+      name: VSC80XL74
+      server: *bug-XL74
+    - <<: *VmessWSCDN80
+      name: VSC80XL75
+      server: *bug-XL75
+    - <<: *VmessWSCDN80
+      name: VSC80XL76
+      server: *bug-XL76
+    - <<: *VmessWSCDN80
+      name: VSC80XL77
+      server: *bug-XL77
+    - <<: *VmessWSCDN80
+      name: VSC80XL78
+      server: *bug-XL78
+    - <<: *VmessWSCDN80
+      name: VSC80XL79
+      server: *bug-XL79
+    - <<: *VmessWSCDN80
+      name: VSC80XL80
+      server: *bug-XL80
+    - <<: *VmessWSCDN80
+      name: VSC80XL81
+      server: *bug-XL81
+    - <<: *VmessWSCDN80
+      name: VSC80XL82
+      server: *bug-XL82
+    - <<: *VmessWSCDN80
+      name: VSC80XL83
+      server: *bug-XL83
+    - <<: *VmessWSCDN80
+      name: VSC80XL84
+      server: *bug-XL84
+    - <<: *VmessWSCDN80
+      name: VSC80XL85
+      server: *bug-XL85
+    - <<: *VmessWSCDN80
+      name: VSC80XL86
+      server: *bug-XL86
+    - <<: *VmessWSCDN80
+      name: VSC80XL87
+      server: *bug-XL87
+    - <<: *VmessWSCDN80
+      name: VSC80XL88
+      server: *bug-XL88
+    - <<: *VmessWSCDN80
+      name: VSC80XL89
+      server: *bug-XL89
+    - <<: *VmessWSCDN80
+      name: VSC80XL90
+      server: *bug-XL90
+    - <<: *VmessWSCDN80
+      name: VSC80XL91
+      server: *bug-XL91
+    - <<: *VmessWSCDN80
+      name: VSC80XL92
+      server: *bug-XL92
+    - <<: *VmessWSCDN80
+      name: VSC80XL93
+      server: *bug-XL93
+    - <<: *VmessWSCDN80
+      name: VSC80XL94
+      server: *bug-XL94
+    - <<: *VmessWSCDN80
+      name: VSC80XL95
+      server: *bug-XL95
+    - <<: *VmessWSCDN80
+      name: VSC80XL96
+      server: *bug-XL96
+    - <<: *VmessWSCDN80
+      name: VSC80XL97
+      server: *bug-XL97
+    - <<: *VmessWSCDN80
+      name: VSC80XL98
+      server: *bug-XL98
+    - <<: *VmessWSCDN80
+      name: VSC80Isat1
+      server: *bug-Isat1
+    - <<: *VmessWSCDN80
+      name: VSC80Isat2
+      server: *bug-Isat2
+    - <<: *VmessWSCDN80
+      name: VSC80Isat3
+      server: *bug-Isat3
+    - <<: *VmessWSCDN80
+      name: VSC80Isat4
+      server: *bug-Isat4
+    - <<: *VmessWSCDN80
+      name: VSC80Isat5
+      server: *bug-Isat5
+    - <<: *VmessWSCDN80
+      name: VSC80Isat6
+      server: *bug-Isat6
+    - <<: *VmessWSCDN80
+      name: VSC80Isat7
+      server: *bug-Isat7
+    - <<: *VmessWSCDN80
+      name: VSC80Isat8
+      server: *bug-Isat8
+    - <<: *VmessWSCDN80
+      name: VSC80Isat9
+      server: *bug-Isat9
+    - <<: *VmessWSCDN80
+      name: VSC80Isat10
+      server: *bug-Isat10
+    - <<: *VmessWSCDN80
+      name: VSC80Isat11
+      server: *bug-Isat11
+    - <<: *VmessWSCDN80
+      name: VSC80Isat12
+      server: *bug-Isat12
+    - <<: *VmessWSCDN80
+      name: VSC80Isat13
+      server: *bug-Isat13
+    - <<: *VmessWSCDN80
+      name: VSC80Isat14
+      server: *bug-Isat14
+    - <<: *VmessWSCDN80
+      name: VSC80Isat15
+      server: *bug-Isat15
+    - <<: *VmessWSCDN80
+      name: VSC80Isat16
+      server: *bug-Isat16
+    - <<: *VmessWSCDN80
+      name: VSC80Isat17
+      server: *bug-Isat17
+    - <<: *VmessWSCDN80
+      name: VSC80Isat18
+      server: *bug-Isat18
+    - <<: *VmessWSCDN80
+      name: VSC80Isat19
+      server: *bug-Isat19
+    - <<: *VmessWSCDN80
+      name: VSC80Isat20
+      server: *bug-Isat20
+    - <<: *VmessWSCDN80
+      name: VSC80Isat21
+      server: *bug-Isat21
+    - <<: *VmessWSCDN80
+      name: VSC80Isat22
+      server: *bug-Isat22
+    - <<: *VmessWSCDN80
+      name: VSC80Isat23
+      server: *bug-Isat23
+    - <<: *VmessWSCDN80
+      name: VSC80Isat24
+      server: *bug-Isat24
+    - <<: *VmessWSCDN80
+      name: VSC80Isat25
+      server: *bug-Isat25
+    - <<: *VmessWSCDN80
+      name: VSC80Isat26
+      server: *bug-Isat26
+    - <<: *VmessWSCDN80
+      name: VSC80Isat27
+      server: *bug-Isat27
+    - <<: *VmessWSCDN80
+      name: VSC80Isat28
+      server: *bug-Isat28
+    - <<: *VmessWSCDN80
+      name: VSC80Isat29
+      server: *bug-Isat29
+    - <<: *VmessWSCDN80
+      name: VSC80Isat30
+      server: *bug-Isat30
+    - <<: *VmessWSCDN80
+      name: VSC80Isat31
+      server: *bug-Isat31
+    - <<: *VmessWSCDN80
+      name: VSC80Isat32
+      server: *bug-Isat32
+    - <<: *VmessWSCDN80
+      name: VSC80Isat33
+      server: *bug-Isat33
+    - <<: *VmessWSCDN80
+      name: VSC80Isat34
+      server: *bug-Isat34
+    - <<: *VmessWSCDN80
+      name: VSC80Isat35
+      server: *bug-Isat35
+    - <<: *VmessWSCDN80
+      name: VSC80Isat36
+      server: *bug-Isat36
+    - <<: *VmessWSCDN80
+      name: VSC80Isat37
+      server: *bug-Isat37
+    - <<: *VmessWSCDN80
+      name: VSC80Isat38
+      server: *bug-Isat38
+    - <<: *VmessWSCDN80
+      name: VSC80Isat39
+      server: *bug-Isat39
+    - <<: *VmessWSCDN80
+      name: VSC80Isat40
+      server: *bug-Isat40
+    - <<: *VmessWSCDN80
+      name: VSC80Isat41
+      server: *bug-Isat41
+    - <<: *VmessWSCDN80
+      name: VSC80Isat42
+      server: *bug-Isat42
+    - <<: *VmessWSCDN80
+      name: VSC80Isat43
+      server: *bug-Isat43
+    - <<: *VmessWSCDN80
+      name: VSC80Isat44
+      server: *bug-Isat44
+    - <<: *VmessWSCDN80
+      name: VSC80Isat45
+      server: *bug-Isat45
+    - <<: *VmessWSCDN80
+      name: VSC80Isat46
+      server: *bug-Isat46
+    - <<: *VmessWSCDN80
+      name: VSC80Isat47
+      server: *bug-Isat47
+    - <<: *VmessWSCDN80
+      name: VSC80Isat48
+      server: *bug-Isat48
+    - <<: *VmessWSCDN80
+      name: VSC80Isat49
+      server: *bug-Isat49
+    - <<: *VmessWSCDN80
+      name: VSC80Isat50
+      server: *bug-Isat50
+    - <<: *VmessWSCDN80
+      name: VSC80Isat51
+      server: *bug-Isat51
+    - <<: *VmessWSCDN80
+      name: VSC80Isat52
+      server: *bug-Isat52
+    - <<: *VmessWSCDN80
+      name: VSC80Isat53
+      server: *bug-Isat53
+    - <<: *VmessWSCDN80
+      name: VSC80Isat54
+      server: *bug-Isat54
+    - <<: *VmessWSCDN80
+      name: VSC80Isat55
+      server: *bug-Isat55
+    - <<: *VmessWSCDN80
+      name: VSC80Isat56
+      server: *bug-Isat56
+    - <<: *VmessWSCDN80
+      name: VSC80Isat57
+      server: *bug-Isat57
+    - <<: *VmessWSCDN80
+      name: VSC80Isat58
+      server: *bug-Isat58
+    - <<: *VmessWSCDN80
+      name: VSC80Isat59
+      server: *bug-Isat59
+    - <<: *VmessWSCDN80
+      name: VSC80Isat60
+      server: *bug-Isat60
+    - <<: *VmessWSCDN80
+      name: VSC80Isat61
+      server: *bug-Isat61
+    - <<: *VmessWSCDN80
+      name: VSC80Isat62
+      server: *bug-Isat62
+    - <<: *VmessWSCDN80
+      name: VSC80Isat63
+      server: *bug-Isat63
+    - <<: *VmessWSCDN80
+      name: VSC80Isat64
+      server: *bug-Isat64
+    - <<: *VmessWSCDN80
+      name: VSC80Isat65
+      server: *bug-Isat65
+    - <<: *VmessWSCDN80
+      name: VSC80Isat66
+      server: *bug-Isat66
+    - <<: *VmessWSCDN80
+      name: VSC80Isat67
+      server: *bug-Isat67
+    - <<: *VmessWSCDN80
+      name: VSC80Isat68
+      server: *bug-Isat68
+    - <<: *VmessWSCDN80
+      name: VSC80Isat69
+      server: *bug-Isat69
+    - <<: *VmessWSCDN80
+      name: VSC80Isat70
+      server: *bug-Isat70
+    - <<: *VmessWSCDN80
+      name: VSC80Isat71
+      server: *bug-Isat71
+    - <<: *VmessWSCDN80
+      name: VSC80Isat72
+      server: *bug-Isat72
+    - <<: *VmessWSCDN80
+      name: VSC80Isat73
+      server: *bug-Isat73
+    - <<: *VmessWSCDN80
+      name: VSC80Isat74
+      server: *bug-Isat74
+    - <<: *VmessWSCDN80
+      name: VSC80Isat75
+      server: *bug-Isat75
+    - <<: *VmessWSCDN80
+      name: VSC80Isat76
+      server: *bug-Isat76
+    - <<: *VmessWSCDN80
+      name: VSC80Smar1
+      server: *bug-Smar1
+    - <<: *VmessWSCDN80
+      name: VSC80Smar2
+      server: *bug-Smar2
+    - <<: *VmessWSCDN80
+      name: VSC80Smar3
+      server: *bug-Smar3
+    - <<: *VmessWSCDN80
+      name: VSC80Smar4
+      server: *bug-Smar4
+    - <<: *VmessWSCDN80
+      name: VSC80Smar5
+      server: *bug-Smar5
+    - <<: *VmessWSCDN80
+      name: VSC80Smar6
+      server: *bug-Smar6
+    - <<: *VmessWSCDN80
+      name: VSC80Smar7
+      server: *bug-Smar7
+    - <<: *VmessWSCDN80
+      name: VSC80Smar8
+      server: *bug-Smar8
+    - <<: *VmessWSCDN80
+      name: VSC80Smar9
+      server: *bug-Smar9
+    - <<: *VmessWSCDN80
+      name: VSC80Smar10
+      server: *bug-Smar10
+    - <<: *VmessWSCDN80
+      name: VSC80Smar11
+      server: *bug-Smar11
+    - <<: *VmessWSCDN80
+      name: VSC80Smar12
+      server: *bug-Smar12
+    - <<: *VmessWSCDN80
+      name: VSC80Smar13
+      server: *bug-Smar13
+    - <<: *VmessWSCDN80
+      name: VSC80Smar14
+      server: *bug-Smar14
+    - <<: *VmessWSCDN80
+      name: VSC80Smar15
+      server: *bug-Smar15
+    - <<: *VmessWSCDN80
+      name: VSC80Smar16
+      server: *bug-Smar16
+    - <<: *VmessWSCDN80
+      name: VSC80Smar17
+      server: *bug-Smar17
+    - <<: *VmessWSCDN80
+      name: VSC80Smar18
+      server: *bug-Smar18
+#VmessGRPC
+    - &VmessGRPC
+      <<: *basevmess
+      name: VGPTsel1
+      servername: *bug-Tsel1 
+      port: 443
+      uuid: c6747da4-fb2e-4a2a-bdb7-8614bdd6b0b3
+      server: sg2-v2ray.sshkit.org
+      strategy: consistent-hashing
+      url: https://dns.alidns.com/dns-query
+      interval: 300
+      grpc-opts:
+          grpc-service-name: GRPC
+          X-Online-Host: tor.cloudflare-dns.com
+          X-Forward-Host: tor.cloudflare-dns.com
+          Early-Data: 1
+    - <<: *VmessGRPC
+      name: VGPTsel2
+      servername: *bug-Tsel2
+    - <<: *VmessGRPC
+      name: VGPTsel3
+      servername: *bug-Tsel3
+    - <<: *VmessGRPC
+      name: VGPTsel4
+      servername: *bug-Tsel4
+    - <<: *VmessGRPC
+      name: VGPTsel5
+      servername: *bug-Tsel5
+    - <<: *VmessGRPC
+      name: VGPTsel6
+      servername: *bug-Tsel6
+    - <<: *VmessGRPC
+      name: VGPTsel7
+      servername: *bug-Tsel7
+    - <<: *VmessGRPC
+      name: VGPTsel8
+      servername: *bug-Tsel8
+    - <<: *VmessGRPC
+      name: VGPTsel9
+      servername: *bug-Tsel9
+    - <<: *VmessGRPC
+      name: VGPTsel10
+      servername: *bug-Tsel10
+    - <<: *VmessGRPC
+      name: VGPTsel11
+      servername: *bug-Tsel11
+    - <<: *VmessGRPC
+      name: VGPTsel12
+      servername: *bug-Tsel12
+    - <<: *VmessGRPC
+      name: VGPTsel13
+      servername: *bug-Tsel13
+    - <<: *VmessGRPC
+      name: VGPTsel14
+      servername: *bug-Tsel14
+    - <<: *VmessGRPC
+      name: VGPTsel15
+      servername: *bug-Tsel15
+    - <<: *VmessGRPC
+      name: VGPTsel16
+      servername: *bug-Tsel16
+    - <<: *VmessGRPC
+      name: VGPTsel17
+      servername: *bug-Tsel17
+    - <<: *VmessGRPC
+      name: VGPTsel18
+      servername: *bug-Tsel18
+    - <<: *VmessGRPC
+      name: VGPTsel19
+      servername: *bug-Tsel19
+    - <<: *VmessGRPC
+      name: VGPTsel20
+      servername: *bug-Tsel20
+    - <<: *VmessGRPC
+      name: VGPTsel21
+      servername: *bug-Tsel21
+    - <<: *VmessGRPC
+      name: VGPTsel22
+      servername: *bug-Tsel22
+    - <<: *VmessGRPC
+      name: VGPTsel23
+      servername: *bug-Tsel23
+    - <<: *VmessGRPC
+      name: VGPTsel24
+      servername: *bug-Tsel24
+    - <<: *VmessGRPC
+      name: VGPTsel25
+      servername: *bug-Tsel25
+    - <<: *VmessGRPC
+      name: VGPTsel26
+      servername: *bug-Tsel26
+    - <<: *VmessGRPC
+      name: VGPTsel27
+      servername: *bug-Tsel27
+    - <<: *VmessGRPC
+      name: VGPTsel28
+      servername: *bug-Tsel28
+    - <<: *VmessGRPC
+      name: VGPTsel29
+      servername: *bug-Tsel29
+    - <<: *VmessGRPC
+      name: VGPTsel30
+      servername: *bug-Tsel30
+    - <<: *VmessGRPC
+      name: VGPTsel31
+      servername: *bug-Tsel31
+    - <<: *VmessGRPC
+      name: VGPTsel32
+      servername: *bug-Tsel32
+    - <<: *VmessGRPC
+      name: VGPTsel33
+      servername: *bug-Tsel33
+    - <<: *VmessGRPC
+      name: VGPTsel34
+      servername: *bug-Tsel34
+    - <<: *VmessGRPC
+      name: VGPTsel35
+      servername: *bug-Tsel35
+    - <<: *VmessGRPC
+      name: VGPTsel36
+      servername: *bug-Tsel36
+    - <<: *VmessGRPC
+      name: VGPTsel37
+      servername: *bug-Tsel37
+    - <<: *VmessGRPC
+      name: VGPTsel38
+      servername: *bug-Tsel38
+    - <<: *VmessGRPC
+      name: VGPTsel39
+      servername: *bug-Tsel39
+    - <<: *VmessGRPC
+      name: VGPTsel40
+      servername: *bug-Tsel40
+    - <<: *VmessGRPC
+      name: VGPTsel41
+      servername: *bug-Tsel41
+    - <<: *VmessGRPC
+      name: VGPTsel42
+      servername: *bug-Tsel42
+    - <<: *VmessGRPC
+      name: VGPTsel43
+      servername: *bug-Tsel43
+    - <<: *VmessGRPC
+      name: VGPTsel44
+      servername: *bug-Tsel44
+    - <<: *VmessGRPC
+      name: VGPTsel45
+      servername: *bug-Tsel45
+    - <<: *VmessGRPC
+      name: VGPTsel46
+      servername: *bug-Tsel46
+    - <<: *VmessGRPC
+      name: VGPTsel47
+      servername: *bug-Tsel47
+    - <<: *VmessGRPC
+      name: VGPTsel48
+      servername: *bug-Tsel48
+    - <<: *VmessGRPC
+      name: VGPTsel49
+      servername: *bug-Tsel49
+    - <<: *VmessGRPC
+      name: VGPTsel50
+      servername: *bug-Tsel50
+    - <<: *VmessGRPC
+      name: VGPTsel51
+      servername: *bug-Tsel51
+    - <<: *VmessGRPC
+      name: VGPTsel52
+      servername: *bug-Tsel52
+    - <<: *VmessGRPC
+      name: VGPTsel53
+      servername: *bug-Tsel53
+    - <<: *VmessGRPC
+      name: VGPTsel54
+      servername: *bug-Tsel54
+    - <<: *VmessGRPC
+      name: VGPTsel55
+      servername: *bug-Tsel55
+    - <<: *VmessGRPC
+      name: VGPTsel56
+      servername: *bug-Tsel56
+    - <<: *VmessGRPC
+      name: VGPTsel57
+      servername: *bug-Tsel57
+    - <<: *VmessGRPC
+      name: VGPTsel58
+      servername: *bug-Tsel58
+    - <<: *VmessGRPC
+      name: VGPTsel59
+      servername: *bug-Tsel59
+    - <<: *VmessGRPC
+      name: VGPTsel60
+      servername: *bug-Tsel60
+    - <<: *VmessGRPC
+      name: VGPTsel61
+      servername: *bug-Tsel61
+    - <<: *VmessGRPC
+      name: VGPTsel62
+      servername: *bug-Tsel62
+    - <<: *VmessGRPC
+      name: VGPTsel63
+      servername: *bug-Tsel63
+    - <<: *VmessGRPC
+      name: VGPTsel64
+      servername: *bug-Tsel64
+    - <<: *VmessGRPC
+      name: VGPTsel65
+      servername: *bug-Tsel65
+    - <<: *VmessGRPC
+      name: VGPTsel66
+      servername: *bug-Tsel66
+    - <<: *VmessGRPC
+      name: VGPTsel67
+      servername: *bug-Tsel67
+    - <<: *VmessGRPC
+      name: VGPTsel68
+      servername: *bug-Tsel68
+    - <<: *VmessGRPC
+      name: VGPTsel69
+      servername: *bug-Tsel69
+    - <<: *VmessGRPC
+      name: VGPTsel70
+      servername: *bug-Tsel70
+    - <<: *VmessGRPC
+      name: VGPTsel71
+      servername: *bug-Tsel71
+    - <<: *VmessGRPC
+      name: VGPTsel72
+      servername: *bug-Tsel72
+    - <<: *VmessGRPC
+      name: VGPTsel73
+      servername: *bug-Tsel73
+    - <<: *VmessGRPC
+      name: VGPTsel74
+      servername: *bug-Tsel74
+    - <<: *VmessGRPC
+      name: VGPTsel75
+      servername: *bug-Tsel75
+    - <<: *VmessGRPC
+      name: VGPTsel76
+      servername: *bug-Tsel76
+    - <<: *VmessGRPC
+      name: VGPTsel77
+      servername: *bug-Tsel77
+    - <<: *VmessGRPC
+      name: VGPTsel78
+      servername: *bug-Tsel78
+    - <<: *VmessGRPC
+      name: VGPTsel79
+      servername: *bug-Tsel79
+    - <<: *VmessGRPC
+      name: VGPTsel80
+      servername: *bug-Tsel80
+    - <<: *VmessGRPC
+      name: VGPTsel81
+      servername: *bug-Tsel81
+    - <<: *VmessGRPC
+      name: VGPTsel82
+      servername: *bug-Tsel82
+    - <<: *VmessGRPC
+      name: VGPTsel83
+      servername: *bug-Tsel83
+    - <<: *VmessGRPC
+      name: VGPTsel84
+      servername: *bug-Tsel84
+    - <<: *VmessGRPC
+      name: VGPTsel85
+      servername: *bug-Tsel85
+    - <<: *VmessGRPC
+      name: VGPTsel86
+      servername: *bug-Tsel86
+    - <<: *VmessGRPC
+      name: VGPTsel87
+      servername: *bug-Tsel87
+    - <<: *VmessGRPC
+      name: VGPTsel88
+      servername: *bug-Tsel88
+    - <<: *VmessGRPC
+      name: VGPTsel89
+      servername: *bug-Tsel89
+    - <<: *VmessGRPC
+      name: VGPTsel90
+      servername: *bug-Tsel90
+    - <<: *VmessGRPC
+      name: VGPTsel91
+      servername: *bug-Tsel91
+    - <<: *VmessGRPC
+      name: VGPTsel92
+      servername: *bug-Tsel92
+    - <<: *VmessGRPC
+      name: VGPTsel93
+      servername: *bug-Tsel93
+    - <<: *VmessGRPC
+      name: VGPTsel94
+      servername: *bug-Tsel94
+    - <<: *VmessGRPC
+      name: VGPTsel95
+      servername: *bug-Tsel95
+    - <<: *VmessGRPC
+      name: VGPTsel96
+      servername: *bug-Tsel96
+    - <<: *VmessGRPC
+      name: VGPTsel97
+      servername: *bug-Tsel97
+    - <<: *VmessGRPC
+      name: VGPTsel98
+      servername: *bug-Tsel98
+    - <<: *VmessGRPC
+      name: VGPByu1
+      servername: *bug-Byu1
+    - <<: *VmessGRPC
+      name: VGPByu2
+      servername: *bug-Byu2
+    - <<: *VmessGRPC
+      name: VGPByu3
+      servername: *bug-Byu3
+    - <<: *VmessGRPC
+      name: VGPByu4
+      servername: *bug-Byu4
+    - <<: *VmessGRPC
+      name: VGPByu5
+      servername: *bug-Byu5
+    - <<: *VmessGRPC
+      name: VGPByu6
+      servername: *bug-Byu6
+    - <<: *VmessGRPC
+      name: VGPByu7
+      servername: *bug-Byu7
+    - <<: *VmessGRPC
+      name: VGPByu8
+      servername: *bug-Byu8
+    - <<: *VmessGRPC
+      name: VGPByu9
+      servername: *bug-Byu9
+    - <<: *VmessGRPC
+      name: VGPByu10
+      servername: *bug-Byu10
+    - <<: *VmessGRPC
+      name: VGPByu11
+      servername: *bug-Byu11
+    - <<: *VmessGRPC
+      name: VGPByu12
+      servername: *bug-Byu12
+    - <<: *VmessGRPC
+      name: VGPByu13
+      servername: *bug-Byu13
+    - <<: *VmessGRPC
+      name: VGPByu14
+      servername: *bug-Byu14
+    - <<: *VmessGRPC
+      name: VGPByu15
+      servername: *bug-Byu15
+    - <<: *VmessGRPC
+      name: VGPByu16
+      servername: *bug-Byu16
+    - <<: *VmessGRPC
+      name: VGPByu17
+      servername: *bug-Byu17
+    - <<: *VmessGRPC
+      name: VGPByu18
+      servername: *bug-Byu18
+    - <<: *VmessGRPC
+      name: VGPByu19
+      servername: *bug-Byu19
+    - <<: *VmessGRPC
+      name: VGPByu20
+      servername: *bug-Byu20
+    - <<: *VmessGRPC
+      name: VGPByu21
+      servername: *bug-Byu21
+    - <<: *VmessGRPC
+      name: VGPByu22
+      servername: *bug-Byu22
+    - <<: *VmessGRPC
+      name: VGPByu23
+      servername: *bug-Byu23
+    - <<: *VmessGRPC
+      name: VGPByu24
+      servername: *bug-Byu24
+    - <<: *VmessGRPC
+      name: VGPByu25
+      servername: *bug-Byu25
+    - <<: *VmessGRPC
+      name: VGPByu26
+      servername: *bug-Byu26
+    - <<: *VmessGRPC
+      name: VGPByu27
+      servername: *bug-Byu27
+    - <<: *VmessGRPC
+      name: VGPByu28
+      servername: *bug-Byu28
+    - <<: *VmessGRPC
+      name: VGPByu29
+      servername: *bug-Byu29
+    - <<: *VmessGRPC
+      name: VGPByu30
+      servername: *bug-Byu30
+    - <<: *VmessGRPC
+      name: VGPByu31
+      servername: *bug-Byu31
+    - <<: *VmessGRPC
+      name: VGPByu32
+      servername: *bug-Byu32
+    - <<: *VmessGRPC
+      name: VGPByu33
+      servername: *bug-Byu33
+    - <<: *VmessGRPC
+      name: VGPByu34
+      servername: *bug-Byu34
+    - <<: *VmessGRPC
+      name: VGPByu35
+      servername: *bug-Byu35
+    - <<: *VmessGRPC
+      name: VGPByu36
+      servername: *bug-Byu36
+    - <<: *VmessGRPC
+      name: VGPByu37
+      servername: *bug-Byu37
+    - <<: *VmessGRPC
+      name: VGPByu38
+      servername: *bug-Byu38
+    - <<: *VmessGRPC
+      name: VGPByu39
+      servername: *bug-Byu39
+    - <<: *VmessGRPC
+      name: VGPByu40
+      servername: *bug-Byu40
+    - <<: *VmessGRPC
+      name: VGPByu41
+      servername: *bug-Byu41
+    - <<: *VmessGRPC
+      name: VGPByu42
+      servername: *bug-Byu42
+    - <<: *VmessGRPC
+      name: VGPByu43
+      servername: *bug-Byu43
+    - <<: *VmessGRPC
+      name: VGPByu44
+      servername: *bug-Byu44
+    - <<: *VmessGRPC
+      name: VGPByu45
+      servername: *bug-Byu45
+    - <<: *VmessGRPC
+      name: VGPByu46
+      servername: *bug-Byu46
+    - <<: *VmessGRPC
+      name: VGPByu47
+      servername: *bug-Byu47
+    - <<: *VmessGRPC
+      name: VGPByu48
+      servername: *bug-Byu48
+    - <<: *VmessGRPC
+      name: VGPByu49
+      servername: *bug-Byu49
+    - <<: *VmessGRPC
+      name: VGPByu50
+      servername: *bug-Byu50
+    - <<: *VmessGRPC
+      name: VGPByu51
+      servername: *bug-Byu51
+    - <<: *VmessGRPC
+      name: VGPByu52
+      servername: *bug-Byu52
+    - <<: *VmessGRPC
+      name: VGPByu53
+      servername: *bug-Byu53
+    - <<: *VmessGRPC
+      name: VGPByu54
+      servername: *bug-Byu54
+    - <<: *VmessGRPC
+      name: VGPByu55
+      servername: *bug-Byu55
+    - <<: *VmessGRPC
+      name: VGPByu56
+      servername: *bug-Byu56
+    - <<: *VmessGRPC
+      name: VGPByu57
+      servername: *bug-Byu57
+    - <<: *VmessGRPC
+      name: VGPByu58
+      servername: *bug-Byu58
+    - <<: *VmessGRPC
+      name: VGPByu59
+      servername: *bug-Byu59
+    - <<: *VmessGRPC
+      name: VGPByu60
+      servername: *bug-Byu60
+    - <<: *VmessGRPC
+      name: VGPByu61
+      servername: *bug-Byu61
+    - <<: *VmessGRPC
+      name: VGPByu62
+      servername: *bug-Byu62
+    - <<: *VmessGRPC
+      name: VGPByu63
+      servername: *bug-Byu63
+    - <<: *VmessGRPC
+      name: VGPByu64
+      servername: *bug-Byu64
+    - <<: *VmessGRPC
+      name: VGPByu65
+      servername: *bug-Byu65
+    - <<: *VmessGRPC
+      name: VGPByu66
+      servername: *bug-Byu66
+    - <<: *VmessGRPC
+      name: VGPByu67
+      servername: *bug-Byu67
+    - <<: *VmessGRPC
+      name: VGPByu68
+      servername: *bug-Byu68
+    - <<: *VmessGRPC
+      name: VGPByu69
+      servername: *bug-Byu69
+    - <<: *VmessGRPC
+      name: VGPByu70
+      servername: *bug-Byu70
+    - <<: *VmessGRPC
+      name: VGPByu71
+      servername: *bug-Byu71
+    - <<: *VmessGRPC
+      name: VGPByu72
+      servername: *bug-Byu72
+    - <<: *VmessGRPC
+      name: VGPByu73
+      servername: *bug-Byu73
+    - <<: *VmessGRPC
+      name: VGPByu74
+      servername: *bug-Byu74
+    - <<: *VmessGRPC
+      name: VGPByu75
+      servername: *bug-Byu75
+    - <<: *VmessGRPC
+      name: VGPByu76
+      servername: *bug-Byu76
+    - <<: *VmessGRPC
+      name: VGPByu77
+      servername: *bug-Byu77
+    - <<: *VmessGRPC
+      name: VGPByu78
+      servername: *bug-Byu78
+    - <<: *VmessGRPC
+      name: VGPByu79
+      servername: *bug-Byu79
+    - <<: *VmessGRPC
+      name: VGPByu80
+      servername: *bug-Byu80
+    - <<: *VmessGRPC
+      name: VGPByu81
+      servername: *bug-Byu81
+    - <<: *VmessGRPC
+      name: VGPByu82
+      servername: *bug-Byu82
+    - <<: *VmessGRPC
+      name: VGPByu83
+      servername: *bug-Byu83
+    - <<: *VmessGRPC
+      name: VGPXL1
+      servername: *bug-XL1
+    - <<: *VmessGRPC
+      name: VGPXL2
+      servername: *bug-XL2
+    - <<: *VmessGRPC
+      name: VGPXL3
+      servername: *bug-XL3
+    - <<: *VmessGRPC
+      name: VGPXL4
+      servername: *bug-XL4
+    - <<: *VmessGRPC
+      name: VGPXL5
+      servername: *bug-XL5
+    - <<: *VmessGRPC
+      name: VGPXL6
+      servername: *bug-XL6
+    - <<: *VmessGRPC
+      name: VGPXL7
+      servername: *bug-XL7
+    - <<: *VmessGRPC
+      name: VGPXL8
+      servername: *bug-XL8
+    - <<: *VmessGRPC
+      name: VGPXL9
+      servername: *bug-XL9
+    - <<: *VmessGRPC
+      name: VGPXL10
+      servername: *bug-XL10
+    - <<: *VmessGRPC
+      name: VGPXL11
+      servername: *bug-XL11
+    - <<: *VmessGRPC
+      name: VGPXL12
+      servername: *bug-XL12
+    - <<: *VmessGRPC
+      name: VGPXL13
+      servername: *bug-XL13
+    - <<: *VmessGRPC
+      name: VGPXL14
+      servername: *bug-XL14
+    - <<: *VmessGRPC
+      name: VGPXL15
+      servername: *bug-XL15
+    - <<: *VmessGRPC
+      name: VGPXL16
+      servername: *bug-XL16
+    - <<: *VmessGRPC
+      name: VGPXL17
+      servername: *bug-XL17
+    - <<: *VmessGRPC
+      name: VGPXL18
+      servername: *bug-XL18
+    - <<: *VmessGRPC
+      name: VGPXL19
+      servername: *bug-XL19
+    - <<: *VmessGRPC
+      name: VGPXL20
+      servername: *bug-XL20
+    - <<: *VmessGRPC
+      name: VGPXL21
+      servername: *bug-XL21
+    - <<: *VmessGRPC
+      name: VGPXL22
+      servername: *bug-XL22
+    - <<: *VmessGRPC
+      name: VGPXL23
+      servername: *bug-XL23
+    - <<: *VmessGRPC
+      name: VGPXL24
+      servername: *bug-XL24
+    - <<: *VmessGRPC
+      name: VGPXL25
+      servername: *bug-XL25
+    - <<: *VmessGRPC
+      name: VGPXL26
+      servername: *bug-XL26
+    - <<: *VmessGRPC
+      name: VGPXL27
+      servername: *bug-XL27
+    - <<: *VmessGRPC
+      name: VGPXL28
+      servername: *bug-XL28
+    - <<: *VmessGRPC
+      name: VGPXL29
+      servername: *bug-XL29
+    - <<: *VmessGRPC
+      name: VGPXL30
+      servername: *bug-XL30
+    - <<: *VmessGRPC
+      name: VGPXL31
+      servername: *bug-XL31
+    - <<: *VmessGRPC
+      name: VGPXL32
+      servername: *bug-XL32
+    - <<: *VmessGRPC
+      name: VGPXL33
+      servername: *bug-XL33
+    - <<: *VmessGRPC
+      name: VGPXL34
+      servername: *bug-XL34
+    - <<: *VmessGRPC
+      name: VGPXL35
+      servername: *bug-XL35
+    - <<: *VmessGRPC
+      name: VGPXL36
+      servername: *bug-XL36
+    - <<: *VmessGRPC
+      name: VGPXL37
+      servername: *bug-XL37
+    - <<: *VmessGRPC
+      name: VGPXL38
+      servername: *bug-XL38
+    - <<: *VmessGRPC
+      name: VGPXL39
+      servername: *bug-XL39
+    - <<: *VmessGRPC
+      name: VGPXL40
+      servername: *bug-XL40
+    - <<: *VmessGRPC
+      name: VGPXL41
+      servername: *bug-XL41
+    - <<: *VmessGRPC
+      name: VGPXL42
+      servername: *bug-XL42
+    - <<: *VmessGRPC
+      name: VGPXL43
+      servername: *bug-XL43
+    - <<: *VmessGRPC
+      name: VGPXL44
+      servername: *bug-XL44
+    - <<: *VmessGRPC
+      name: VGPXL45
+      servername: *bug-XL45
+    - <<: *VmessGRPC
+      name: VGPXL46
+      servername: *bug-XL46
+    - <<: *VmessGRPC
+      name: VGPXL47
+      servername: *bug-XL47
+    - <<: *VmessGRPC
+      name: VGPXL48
+      servername: *bug-XL48
+    - <<: *VmessGRPC
+      name: VGPXL49
+      servername: *bug-XL49
+    - <<: *VmessGRPC
+      name: VGPXL50
+      servername: *bug-XL50
+    - <<: *VmessGRPC
+      name: VGPXL51
+      servername: *bug-XL51
+    - <<: *VmessGRPC
+      name: VGPXL52
+      servername: *bug-XL52
+    - <<: *VmessGRPC
+      name: VGPXL53
+      servername: *bug-XL53
+    - <<: *VmessGRPC
+      name: VGPXL54
+      servername: *bug-XL54
+    - <<: *VmessGRPC
+      name: VGPXL55
+      servername: *bug-XL55
+    - <<: *VmessGRPC
+      name: VGPXL56
+      servername: *bug-XL56
+    - <<: *VmessGRPC
+      name: VGPXL57
+      servername: *bug-XL57
+    - <<: *VmessGRPC
+      name: VGPXL58
+      servername: *bug-XL58
+    - <<: *VmessGRPC
+      name: VGPXL59
+      servername: *bug-XL59
+    - <<: *VmessGRPC
+      name: VGPXL60
+      servername: *bug-XL60
+    - <<: *VmessGRPC
+      name: VGPXL61
+      servername: *bug-XL61
+    - <<: *VmessGRPC
+      name: VGPXL62
+      servername: *bug-XL62
+    - <<: *VmessGRPC
+      name: VGPXL63
+      servername: *bug-XL63
+    - <<: *VmessGRPC
+      name: VGPXL64
+      servername: *bug-XL64
+    - <<: *VmessGRPC
+      name: VGPXL65
+      servername: *bug-XL65
+    - <<: *VmessGRPC
+      name: VGPXL66
+      servername: *bug-XL66
+    - <<: *VmessGRPC
+      name: VGPXL67
+      servername: *bug-XL67
+    - <<: *VmessGRPC
+      name: VGPXL68
+      servername: *bug-XL68
+    - <<: *VmessGRPC
+      name: VGPXL69
+      servername: *bug-XL69
+    - <<: *VmessGRPC
+      name: VGPXL70
+      servername: *bug-XL70
+    - <<: *VmessGRPC
+      name: VGPXL71
+      servername: *bug-XL71
+    - <<: *VmessGRPC
+      name: VGPXL72
+      servername: *bug-XL72
+    - <<: *VmessGRPC
+      name: VGPXL73
+      servername: *bug-XL73
+    - <<: *VmessGRPC
+      name: VGPXL74
+      servername: *bug-XL74
+    - <<: *VmessGRPC
+      name: VGPXL75
+      servername: *bug-XL75
+    - <<: *VmessGRPC
+      name: VGPXL76
+      servername: *bug-XL76
+    - <<: *VmessGRPC
+      name: VGPXL77
+      servername: *bug-XL77
+    - <<: *VmessGRPC
+      name: VGPXL78
+      servername: *bug-XL78
+    - <<: *VmessGRPC
+      name: VGPXL79
+      servername: *bug-XL79
+    - <<: *VmessGRPC
+      name: VGPXL80
+      servername: *bug-XL80
+    - <<: *VmessGRPC
+      name: VGPXL81
+      servername: *bug-XL81
+    - <<: *VmessGRPC
+      name: VGPXL82
+      servername: *bug-XL82
+    - <<: *VmessGRPC
+      name: VGPXL83
+      servername: *bug-XL83
+    - <<: *VmessGRPC
+      name: VGPXL84
+      servername: *bug-XL84
+    - <<: *VmessGRPC
+      name: VGPXL85
+      servername: *bug-XL85
+    - <<: *VmessGRPC
+      name: VGPXL86
+      servername: *bug-XL86
+    - <<: *VmessGRPC
+      name: VGPXL87
+      servername: *bug-XL87
+    - <<: *VmessGRPC
+      name: VGPXL88
+      servername: *bug-XL88
+    - <<: *VmessGRPC
+      name: VGPXL89
+      servername: *bug-XL89
+    - <<: *VmessGRPC
+      name: VGPXL90
+      servername: *bug-XL90
+    - <<: *VmessGRPC
+      name: VGPXL91
+      servername: *bug-XL91
+    - <<: *VmessGRPC
+      name: VGPXL92
+      servername: *bug-XL92
+    - <<: *VmessGRPC
+      name: VGPXL93
+      servername: *bug-XL93
+    - <<: *VmessGRPC
+      name: VGPXL94
+      servername: *bug-XL94
+    - <<: *VmessGRPC
+      name: VGPXL95
+      servername: *bug-XL95
+    - <<: *VmessGRPC
+      name: VGPXL96
+      servername: *bug-XL96
+    - <<: *VmessGRPC
+      name: VGPXL97
+      servername: *bug-XL97
+    - <<: *VmessGRPC
+      name: VGPXL98
+      servername: *bug-XL98
+    - <<: *VmessGRPC
+      name: VGPIsat1
+      servername: *bug-Isat1
+    - <<: *VmessGRPC
+      name: VGPIsat2
+      servername: *bug-Isat2
+    - <<: *VmessGRPC
+      name: VGPIsat3
+      servername: *bug-Isat3
+    - <<: *VmessGRPC
+      name: VGPIsat4
+      servername: *bug-Isat4
+    - <<: *VmessGRPC
+      name: VGPIsat5
+      servername: *bug-Isat5
+    - <<: *VmessGRPC
+      name: VGPIsat6
+      servername: *bug-Isat6
+    - <<: *VmessGRPC
+      name: VGPIsat7
+      servername: *bug-Isat7
+    - <<: *VmessGRPC
+      name: VGPIsat8
+      servername: *bug-Isat8
+    - <<: *VmessGRPC
+      name: VGPIsat9
+      servername: *bug-Isat9
+    - <<: *VmessGRPC
+      name: VGPIsat10
+      servername: *bug-Isat10
+    - <<: *VmessGRPC
+      name: VGPIsat11
+      servername: *bug-Isat11
+    - <<: *VmessGRPC
+      name: VGPIsat12
+      servername: *bug-Isat12
+    - <<: *VmessGRPC
+      name: VGPIsat13
+      servername: *bug-Isat13
+    - <<: *VmessGRPC
+      name: VGPIsat14
+      servername: *bug-Isat14
+    - <<: *VmessGRPC
+      name: VGPIsat15
+      servername: *bug-Isat15
+    - <<: *VmessGRPC
+      name: VGPIsat16
+      servername: *bug-Isat16
+    - <<: *VmessGRPC
+      name: VGPIsat17
+      servername: *bug-Isat17
+    - <<: *VmessGRPC
+      name: VGPIsat18
+      servername: *bug-Isat18
+    - <<: *VmessGRPC
+      name: VGPIsat19
+      servername: *bug-Isat19
+    - <<: *VmessGRPC
+      name: VGPIsat20
+      servername: *bug-Isat20
+    - <<: *VmessGRPC
+      name: VGPIsat21
+      servername: *bug-Isat21
+    - <<: *VmessGRPC
+      name: VGPIsat22
+      servername: *bug-Isat22
+    - <<: *VmessGRPC
+      name: VGPIsat23
+      servername: *bug-Isat23
+    - <<: *VmessGRPC
+      name: VGPIsat24
+      servername: *bug-Isat24
+    - <<: *VmessGRPC
+      name: VGPIsat25
+      servername: *bug-Isat25
+    - <<: *VmessGRPC
+      name: VGPIsat26
+      servername: *bug-Isat26
+    - <<: *VmessGRPC
+      name: VGPIsat27
+      servername: *bug-Isat27
+    - <<: *VmessGRPC
+      name: VGPIsat28
+      servername: *bug-Isat28
+    - <<: *VmessGRPC
+      name: VGPIsat29
+      servername: *bug-Isat29
+    - <<: *VmessGRPC
+      name: VGPIsat30
+      servername: *bug-Isat30
+    - <<: *VmessGRPC
+      name: VGPIsat31
+      servername: *bug-Isat31
+    - <<: *VmessGRPC
+      name: VGPIsat32
+      servername: *bug-Isat32
+    - <<: *VmessGRPC
+      name: VGPIsat33
+      servername: *bug-Isat33
+    - <<: *VmessGRPC
+      name: VGPIsat34
+      servername: *bug-Isat34
+    - <<: *VmessGRPC
+      name: VGPIsat35
+      servername: *bug-Isat35
+    - <<: *VmessGRPC
+      name: VGPIsat36
+      servername: *bug-Isat36
+    - <<: *VmessGRPC
+      name: VGPIsat37
+      servername: *bug-Isat37
+    - <<: *VmessGRPC
+      name: VGPIsat38
+      servername: *bug-Isat38
+    - <<: *VmessGRPC
+      name: VGPIsat39
+      servername: *bug-Isat39
+    - <<: *VmessGRPC
+      name: VGPIsat40
+      servername: *bug-Isat40
+    - <<: *VmessGRPC
+      name: VGPIsat41
+      servername: *bug-Isat41
+    - <<: *VmessGRPC
+      name: VGPIsat42
+      servername: *bug-Isat42
+    - <<: *VmessGRPC
+      name: VGPIsat43
+      servername: *bug-Isat43
+    - <<: *VmessGRPC
+      name: VGPIsat44
+      servername: *bug-Isat44
+    - <<: *VmessGRPC
+      name: VGPIsat45
+      servername: *bug-Isat45
+    - <<: *VmessGRPC
+      name: VGPIsat46
+      servername: *bug-Isat46
+    - <<: *VmessGRPC
+      name: VGPIsat47
+      servername: *bug-Isat47
+    - <<: *VmessGRPC
+      name: VGPIsat48
+      servername: *bug-Isat48
+    - <<: *VmessGRPC
+      name: VGPIsat49
+      servername: *bug-Isat49
+    - <<: *VmessGRPC
+      name: VGPIsat50
+      servername: *bug-Isat50
+    - <<: *VmessGRPC
+      name: VGPIsat51
+      servername: *bug-Isat51
+    - <<: *VmessGRPC
+      name: VGPIsat52
+      servername: *bug-Isat52
+    - <<: *VmessGRPC
+      name: VGPIsat53
+      servername: *bug-Isat53
+    - <<: *VmessGRPC
+      name: VGPIsat54
+      servername: *bug-Isat54
+    - <<: *VmessGRPC
+      name: VGPIsat55
+      servername: *bug-Isat55
+    - <<: *VmessGRPC
+      name: VGPIsat56
+      servername: *bug-Isat56
+    - <<: *VmessGRPC
+      name: VGPIsat57
+      servername: *bug-Isat57
+    - <<: *VmessGRPC
+      name: VGPIsat58
+      servername: *bug-Isat58
+    - <<: *VmessGRPC
+      name: VGPIsat59
+      servername: *bug-Isat59
+    - <<: *VmessGRPC
+      name: VGPIsat60
+      servername: *bug-Isat60
+    - <<: *VmessGRPC
+      name: VGPIsat61
+      servername: *bug-Isat61
+    - <<: *VmessGRPC
+      name: VGPIsat62
+      servername: *bug-Isat62
+    - <<: *VmessGRPC
+      name: VGPIsat63
+      servername: *bug-Isat63
+    - <<: *VmessGRPC
+      name: VGPIsat64
+      servername: *bug-Isat64
+    - <<: *VmessGRPC
+      name: VGPIsat65
+      servername: *bug-Isat65
+    - <<: *VmessGRPC
+      name: VGPIsat66
+      servername: *bug-Isat66
+    - <<: *VmessGRPC
+      name: VGPIsat67
+      servername: *bug-Isat67
+    - <<: *VmessGRPC
+      name: VGPIsat68
+      servername: *bug-Isat68
+    - <<: *VmessGRPC
+      name: VGPIsat69
+      servername: *bug-Isat69
+    - <<: *VmessGRPC
+      name: VGPIsat70
+      servername: *bug-Isat70
+    - <<: *VmessGRPC
+      name: VGPIsat71
+      servername: *bug-Isat71
+    - <<: *VmessGRPC
+      name: VGPIsat72
+      servername: *bug-Isat72
+    - <<: *VmessGRPC
+      name: VGPIsat73
+      servername: *bug-Isat73
+    - <<: *VmessGRPC
+      name: VGPIsat74
+      servername: *bug-Isat74
+    - <<: *VmessGRPC
+      name: VGPIsat75
+      servername: *bug-Isat75
+    - <<: *VmessGRPC
+      name: VGPIsat76
+      servername: *bug-Isat76
+    - <<: *VmessGRPC
+      name: VGPSmar1
+      servername: *bug-Smar1
+    - <<: *VmessGRPC
+      name: VGPSmar2
+      servername: *bug-Smar2
+    - <<: *VmessGRPC
+      name: VGPSmar3
+      servername: *bug-Smar3
+    - <<: *VmessGRPC
+      name: VGPSmar4
+      servername: *bug-Smar4
+    - <<: *VmessGRPC
+      name: VGPSmar5
+      servername: *bug-Smar5
+    - <<: *VmessGRPC
+      name: VGPSmar6
+      servername: *bug-Smar6
+    - <<: *VmessGRPC
+      name: VGPSmar7
+      servername: *bug-Smar7
+    - <<: *VmessGRPC
+      name: VGPSmar8
+      servername: *bug-Smar8
+    - <<: *VmessGRPC
+      name: VGPSmar9
+      servername: *bug-Smar9
+    - <<: *VmessGRPC
+      name: VGPSmar10
+      servername: *bug-Smar10
+    - <<: *VmessGRPC
+      name: VGPSmar11
+      servername: *bug-Smar11
+    - <<: *VmessGRPC
+      name: VGPSmar12
+      servername: *bug-Smar12
+    - <<: *VmessGRPC
+      name: VGPSmar13
+      servername: *bug-Smar13
+    - <<: *VmessGRPC
+      name: VGPSmar14
+      servername: *bug-Smar14
+    - <<: *VmessGRPC
+      name: VGPSmar15
+      servername: *bug-Smar15
+    - <<: *VmessGRPC
+      name: VGPSmar16
+      servername: *bug-Smar16
+    - <<: *VmessGRPC
+      name: VGPSmar17
+      servername: *bug-Smar17
+    - <<: *VmessGRPC
+      name: VGPSmar18
+      servername: *bug-Smar18
+
+
+
+  # Rule Providers
+# Check time conversion here https://www.timecalculator.net/hours-to-seconds
+rules-providers:
+  AnyDesk:
+    type: http
+    behavior: classical
+    path: "./AnyDesk.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/AnyDesk.yaml
+    interval: 86400 # Update rules every 24 hours
+  BCA_Mobile:
+    type: http
+    behavior: classical
+    path: "./XL_Akrab.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/BCA_Mobile.yaml
+    interval: 86400 # Update rules every 24 hours
+  BeforeAdblock:
+    type: http
+    behavior: classical
+    path: "./BeforeAdblock.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/BeforeAdblock.yaml
+    interval: 86400 # Update rules every 24 hours
+  BlokIklan:
+    type: http
+    behavior: classical
+    path: "./BlokIklan.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/BlokIklan.yaml
+    interval: 86400 # Update rules every 24 hours
+  Discord_Global:
+    type: http
+    behavior: classical
+    path: "./Discord_Global.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Discord_Global.yaml
+    interval: 86400 # Update rules every 24 hours
+  Discord_Ports:
+    type: http
+    behavior: classical
+    path: "./Discord_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Discord_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Facebook:
+    type: http
+    behavior: classical
+    path: "./Facebook.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Facebook.yaml
+    interval: 86400 # Update rules every 24 hours
+  Flip_id:
+    type: http
+    behavior: classical
+    path: "./Flip_id.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Flip_id.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_ArenaOfValor_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_ArenaOfValor_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_ArenaOfValor_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  myXL:
+    type: http
+    behavior: classical
+    path: "./myXL.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/myXL.yaml
+    interval: 86400 # Update rules every 24 hours
+  myIM3:
+    type: http
+    behavior: classical
+    path: "./myIM3.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/myIM3.yaml
+    interval: 86400 # Update rules every 24 hours
+  byU:
+    type: http
+    behavior: classical
+    path: "./byU.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/byU.yaml
+    interval: 86400 # Update rules every 24 hours
+  XL_Akrab:
+    type: http
+    behavior: classical
+    path: "./XL_Akrab.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/XL_Akrab.yaml
+    interval: 86400 # Update rules every 24 hours
+  Zerotier:
+    type: http
+    behavior: classical
+    path: "./Zerotier.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Zerotier.yaml
+    interval: 86400 # Update rules every 24 hours
+  Zoom:
+    type: http
+    behavior: classical
+    path: "./Zoom.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Zoom.yaml
+    interval: 86400 # Update rules every 24 hours
+  Youtube:
+    type: http
+    behavior: classical
+    path: "./Youtube.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Youtube.yaml
+    interval: 86400 # Update rules every 24 hours
+  WhatsApp:
+    type: http
+    behavior: classical
+    path: "./WhatsApp.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/WhatsApp.yaml
+    interval: 86400 # Update rules every 24 hours
+  WeTV:
+    type: http
+    behavior: classical
+    path: "./WeTV.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/WeTV.yaml
+    interval: 86400 # Update rules every 24 hours
+  Twitter:
+    type: http
+    behavior: classical
+    path: "./Twitter.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Twitter.yaml
+    interval: 86400 # Update rules every 24 hours
+  Tokopedia:
+    type: http
+    behavior: classical
+    path: "./Tokopedia.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Tokopedia.yaml
+    interval: 86400 # Update rules every 24 hours
+  Tiktok:
+    type: http
+    behavior: classical
+    path: "./Tiktok.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Tiktok.yaml
+    interval: 86400 # Update rules every 24 hours
+  Telegram:
+    type: http
+    behavior: classical
+    path: "./Telegram.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Telegram.yaml
+    interval: 86400 # Update rules every 24 hours
+  Stream_VisionPlus:
+    type: http
+    behavior: classical
+    path: "./Stream_VisionPlus.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Stream_VisionPlus.yaml
+    interval: 86400 # Update rules every 24 hours
+  Stream_Vidio:
+    type: http
+    behavior: classical
+    path: "./Stream_Vidio.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Stream_Vidio.yaml
+    interval: 86400 # Update rules every 24 hours
+  Stream_IFLIX_WeTV:
+    type: http
+    behavior: classical
+    path: "./Stream_IFLIX_WeTV.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Stream_IFLIX_WeTV.yaml
+    interval: 86400 # Update rules every 24 hours
+  Stream_DisneyHotstar:
+    type: http
+    behavior: classical
+    path: "./Stream_DisneyHotstar.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Stream_DisneyHotstar.yaml
+    interval: 86400 # Update rules every 24 hours
+  Steam:
+    type: http
+    behavior: classical
+    path: "./Steam.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Steam.yaml
+    interval: 86400 # Update rules every 24 hours
+  Spotify:
+    type: http
+    behavior: classical
+    path: "./Spotify.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Spotify.yaml
+    interval: 86400 # Update rules every 24 hours
+  Shopee:
+    type: http
+    behavior: classical
+    path: "./Shopee.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Shopee.yaml
+    interval: 86400 # Update rules every 24 hours
+  Ruangguru:
+    type: http
+    behavior: classical
+    path: "./Ruangguru.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Ruangguru.yaml
+    interval: 86400 # Update rules every 24 hours
+  MyTelkomsel:
+    type: http
+    behavior: classical
+    path: "./MyTelkomsel.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/MyTelkomsel.yaml
+    interval: 86400 # Update rules every 24 hours
+  Microsoft_Teams:
+    type: http
+    behavior: classical
+    path: "./Microsoft_Teams.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Microsoft_Teams.yaml
+    interval: 86400 # Update rules every 24 hours
+  LINE:
+    type: http
+    behavior: classical
+    path: "./LINE.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/LINE.yaml
+    interval: 86400 # Update rules every 24 hours
+  Jenius:
+    type: http
+    behavior: classical
+    path: "./Jenius.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Jenius.yaml
+    interval: 86400 # Update rules every 24 hours
+  Instagram:
+    type: http
+    behavior: classical
+    path: "./Instagram.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Instagram.yaml
+    interval: 86400 # Update rules every 24 hours
+  Hoyoverse_miHoYo_Global:
+    type: http
+    behavior: classical
+    path: "./Hoyoverse_miHoYo_Global.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Hoyoverse_miHoYo_Global.yaml
+    interval: 86400 # Update rules every 24 hours
+  Google_Meet_Maps_Classroom:
+    type: http
+    behavior: classical
+    path: "./Google_Meet_Maps_Classroom.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Google_Meet_Maps_Classroom.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_Valorant:
+    type: http
+    behavior: classical
+    path: "./Game_Valorant.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_Valorant.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_TowerOfFantasy_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_TowerOfFantasy_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_TowerOfFantasy_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_TowerOfFantasy_Global:
+    type: http
+    behavior: classical
+    path: "./Game_TowerOfFantasy_Global.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_TowerOfFantasy_Global.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_StumbleGuys:
+    type: http
+    behavior: classical
+    path: "./Game_StumbleGuys.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_StumbleGuys.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_SausageMan:
+    type: http
+    behavior: classical
+    path: "./Game_SausageMan.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_SausageMan.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_PUBGMobile_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_PUBGMobile_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_PUBGMobile_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_MobileLegends_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_MobileLegends_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_MobileLegends_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_LeagueOf_Legends_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_LeagueOf_Legends_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_LeagueOf_Legends_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_GenshinImpact_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_GenshinImpact_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_GenshinImpact_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_Freefire_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_Freefire_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_Freefire_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_FallGuys:
+    type: http
+    behavior: classical
+    path: "./Game_FallGuys.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_FallGuys.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_FIFAOnline_Ports:
+    type: http
+    behavior: classical
+    path: "./Game_FIFAOnline_Ports.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_FIFAOnline_Ports.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_CallOfDutyMobile:
+    type: http
+    behavior: classical
+    path: "./Game_CallOfDutyMobile.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_CallOfDutyMobile.yaml
+    interval: 86400 # Update rules every 24 hours
+  Game_COC_ClashRoyale:
+    type: http
+    behavior: classical
+    path: "./Game_COC_ClashRoyale.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Game_COC_ClashRoyale.yaml
+    interval: 86400 # Update rules every 24 hours
+
+  Bundling:
+    type: http
+    behavior: classical
+    path: "./Rule-Bundling"
+    url: https://raw.githubusercontent.com/Yogi-0796/rule_provider/main/Simerah/Rule-Bundling.yaml
+    interval: 86400
+  Gaming:
+    type: http
+    behavior: classical
+    path: "./ruleGamemax.yaml"
+    url: https://raw.githubusercontent.com/Yogi-0796/rule_provider/main/ruleGamemax.yaml
+    interval: 86400
+  Sosmed:
+    type: http
+    behavior: domain
+    path: "./Rule-Sosmed.yaml"
+    url: https://raw.githubusercontent.com/Yogi-0796/rule_provider/main/Simerah/Rule-Sosmed.yaml
+    interval: 86400
+
+Base-rules:
+ - MATCH,ALLSTORE
